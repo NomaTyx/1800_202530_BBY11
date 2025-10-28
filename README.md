@@ -60,7 +60,7 @@ elmo-hikes/
 
 ## Contributors
 - **Umanga** - BCIT CST Student with a passion for hanging out with friends, and coding. Fun fact: Loves rom-com manga's they are so cool. 
-- **Angelica Tanaka (angl-t)** - BCIT CST Student, tired coding student. Fun fact: Has some random knowledge.
+- **Angelica Tanaka (angl-t)** - BCIT CST Student, who is always tired for some reason. Fun fact: Has some random knowledge for some odd reason.
 - **Julia** - BCIT CST Student with a passion for passing demo assignments. Fun fact: Used to be a competitive fencer.
 =======
 
