@@ -6,6 +6,9 @@ import { logoutUser } from "/src/authentication.js";
 class SiteNavbar extends HTMLElement {
   constructor() {
     super();
+  }
+
+  connectedCallback() {
     this.renderNavbar();
     this.renderAuthControls();
   }
@@ -13,7 +16,7 @@ class SiteNavbar extends HTMLElement {
   renderNavbar() {
     this.innerHTML = `
             <!-- Navbar: single source of truth -->
-<nav class="navbar navbar-expand-lg bg-warning">
+    <nav class="navbar navbar-expand-lg bg-warning">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
           <img src="./images/chess-placeholder.png" height="36" />
@@ -33,9 +36,7 @@ class SiteNavbar extends HTMLElement {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html"
-                >Home</a
-              >
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="data-entry.html">Tournaments</a>
@@ -58,6 +59,9 @@ class SiteNavbar extends HTMLElement {
               Search
             </button>
           </form>
+          <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
+            <!-- populated by JS -->
+          </div>
         </div>
       </div>
     </nav>`;
@@ -65,9 +69,6 @@ class SiteNavbar extends HTMLElement {
 
   renderAuthControls() {
     const authControls = this.querySelector("#authControls");
-
-    // Initialize with invisible placeholder to maintain layout space
-    authControls.innerHTML = `<div class="btn btn-outline-light" style="visibility: hidden; min-width: 80px;">Log out</div>`;
 
     onAuthStateChanged(auth, (user) => {
       let updatedAuthControl;
