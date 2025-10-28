@@ -42,10 +42,10 @@ class SiteNavbar extends HTMLElement {
               <a class="nav-link" href="data-entry.html">Tournaments</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Statistics</a>
+              <a class="nav-link" href="statistics.html">Statistics</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Socials</a>
+              <a class="nav-link" href="social.html">Socials</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
