@@ -8,6 +8,8 @@
 
 // Import the initialized Firebase Authentication object
 import { auth } from "/src/firebaseConfig.js";
+import { db } from "/src/firebaseConfig.js";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 
 // Import specific functions from the Firebase Auth SDK
 import {
@@ -56,8 +58,30 @@ export async function signupUser(name, email, password) {
     email,
     password
   );
-  await updateProfile(userCredential.user, { displayName: name });
-  return userCredential.user;
+  const user = userCredential.user;
+  await updateProfile(user, { displayName: name });
+
+  try {
+    await setDoc(doc(db, "users", user.uid), {
+      name: name,
+      email: email,
+      country: "Canada", // Default value
+      school: "BCIT", // Default value
+    });
+    //no i don't understand why this works but im not going to FREAKING WORRY ABOUT IT
+    const parentDocRef = doc(db, "users", user.uid);
+    const subcollectionRef = collection(parentDocRef, "tournamentData");
+    await setDoc(doc(subcollectionRef, "placeholderTournament"), {
+      name: "hi",
+      email: "hello",
+    });
+    console.log("Firestore user document created successfully!");
+  } catch (error) {
+    alert("THERE WAS AN ERROR");
+    console.error("Error creating user document in Firestore:", error);
+  }
+
+  return user;
 }
 
 // -------------------------------------------------------------
