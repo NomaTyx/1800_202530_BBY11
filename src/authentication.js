@@ -88,7 +88,7 @@ export async function signupUser(name, email, password) {
 // logoutUser()
 // -------------------------------------------------------------
 // Signs out the currently logged-in user and redirects them
-// back to the login page (index.html).
+// back to the login page (login.html).
 //
 // Usage:
 //   await logoutUser();
@@ -106,7 +106,7 @@ export async function logoutUser() {
 //
 // If the user is on "main.html":
 //   - If logged in → displays "Hello, [Name]!"
-//   - If not logged in → redirects to "index.html"
+//   - If not logged in → redirects to "login.html"
 //
 // This function should be called once when the page loads.
 //
@@ -120,7 +120,7 @@ export function checkAuthState() {
         const displayName = user.displayName || user.email;
         $("#welcomeMessage").text(`Hello, ${displayName}!`);
       } else {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }
     }
   });
