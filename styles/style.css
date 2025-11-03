@@ -1,1 +1,23 @@
+/* Colour Hex COdes
+#ECDAB9 - light biege(?)
+#AF8A68 - light brown
+#3B2F23 - dark brown
+#1E1812 - really dark brown
+*/
 
+.container, .col-xl-10, .col-xxl-8, .px-4, .py-5 {
+    color: #1E1812;
+
+    .w-100, .btn, .btn-lg, .btn-warning {
+        border-color: #AF8A68;
+        background-color: #AF8A68;
+    }
+
+    .text-body-secondary {
+        color: #1E1812;
+    }
+}
+
+body {
+    background-color: #ECDAB9;
+}

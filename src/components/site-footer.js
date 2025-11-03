@@ -1,3 +1,5 @@
+import '/styles/component-style.css';
+
 //this class basically makes a footer that you can import, so when you make changes they appear on every site
 class SiteFooter extends HTMLElement {
   connectedCallback() {
