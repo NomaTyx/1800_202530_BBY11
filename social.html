@@ -24,26 +24,42 @@
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
-    <div class="profile-display-container card container">
-      <div class="mb-3">
-        <img src="images/chess-placeholder.png" alt=""/>
-        <p>next sprints socials tab</p>
+    <div class="col">
+      <div class="card">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="\images\chess-placeholder.png" alt="profile_picture" />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title Username">username here</h5>
+              <p class="card-text">"bio messege could go here"</p>
+            </div>
+            <div class="settings-button"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="bio-display">
-    </div>
-    <!-- most recent tornament (tooglable in future sprint) -->
-    <div class="tornament" >
+    <!-- get a tornament componet -->
+    <div class="tornament"></div>
 
-    </div>
-    <div class="friend-container">
-      <div class="friend-buttons">
+    <!-- will have to get a freind component for each friend listing -->
+    <div class="container">
+      <div class="friend-buttons row">
+        <div class="col">
+          <img src="\images\chess-placeholder.png" alt="friends-icon" />
+          <p>Friends(21)</p>
+        </div>
 
+        <div class="col">
+          <img src="\images\chess-placeholder.png" alt="friends-icon" />
+          <p>Add Friends</p>
+        </div>
       </div>
-      <!--  -->
-      <div class="friend-elements">
 
+      <div class="container row">
+        <friendCard></friendCard>
       </div>
     </div>
 
