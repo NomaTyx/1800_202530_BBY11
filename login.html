@@ -11,6 +11,8 @@
     <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+
+    <link rel="stylesheet" href="./styles/style.css" />
   </head>
 
   <body>
@@ -22,80 +24,102 @@
     <site-navbar></site-navbar>
 
     <!-- Main content goes here -->
-    <div class="container py-5" style="max-width: 420px">
-      <!-- Alerts -->
-      <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
+    <!-- Alerts -->
+    <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
 
-      <!-- Login -->
-      <div id="loginView">
-        <h3 class="mb-3 text-center">Login</h3>
-        <form id="loginForm" novalidate>
-          <div class="mb-3">
-            <input
-              type="email"
-              id="loginEmail"
-              class="form-control"
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <input
-              type="password"
-              id="loginPassword"
-              class="form-control"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-        <small class="d-block mt-3 text-center">
-          Don’t have an account?
-          <a href="#" id="toSignup">Sign up</a>
-        </small>
-      </div>
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+      <div class="row align-items-center g-lg-5 py-5">
+        <!-- site tagline-->
+        <div class="col-lg-7 text-center text-lg-start">
+          <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
+            The universal chess tracker.
+          </h1>
+          <p class="col-lg-10 fs-4">
+            Save your life by tracking your chess tournaments today.
+          </p>
+        </div>
 
-      <!-- Signup -->
-      <div id="signupView" class="d-none">
-        <h3 class="mb-3 text-center">Sign Up</h3>
-        <form id="signupForm" novalidate>
-          <div class="mb-3">
-            <input
-              type="text"
-              id="signupName"
-              class="form-control"
-              placeholder="First and Last Name"
-              aria-label="Full name"
-              required
-            />
+        <!-- Login -->
+        <div class="col-md-10 mx-auto col-lg-5">
+          <div id="loginView">
+            <h3 class="mb-3 text-center">Login</h3>
+            <form
+              id="loginForm"
+              class="p-4 p-md-5 border rounded-3 bg-body-tertiary"
+              novalidate
+            >
+              <div class="mb-3">
+                <input
+                  type="email"
+                  id="loginEmail"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="password"
+                  id="loginPassword"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <small class="d-block mt-3 text-center">
+              Don’t have an account?
+              <a href="#" id="toSignup">Sign up</a>
+            </small>
           </div>
-          <div class="mb-3">
-            <input
-              type="email"
-              id="signupEmail"
-              class="form-control"
-              placeholder="Email"
-              required
-            />
+
+          <!-- Signup -->
+          <div id="signupView" class="d-none">
+            <h3 class="mb-3 text-center">Sign Up</h3>
+            <form
+              id="signupForm"
+              class="p-4 p-md-5 border rounded-3 bg-body-tertiary"
+              novalidate
+            >
+              <div class="mb-3">
+                <input
+                  type="text"
+                  id="signupName"
+                  class="form-control"
+                  placeholder="First and Last Name"
+                  aria-label="Full name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="email"
+                  id="signupEmail"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="password"
+                  id="signupPassword"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-success w-100">
+                Create Account
+              </button>
+            </form>
           </div>
-          <div class="mb-3">
-            <input
-              type="password"
-              id="signupPassword"
-              class="form-control"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-success w-100">
-            Create Account
-          </button>
-        </form>
-        <small class="d-block mt-3 text-center">
-          Already have an account?
-          <a href="#" id="toLogin">Login</a>
-        </small>
+          <small class="d-block mt-3 text-center">
+            Already have an account?
+            <a href="#" id="toLogin">Login</a>
+          </small>
+        </div>
       </div>
     </div>
     <!-- our own footer goes here -->
