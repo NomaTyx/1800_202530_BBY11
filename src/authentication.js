@@ -8,6 +8,8 @@
 
 // Import the initialized Firebase Authentication object
 import { auth } from "/src/firebaseConfig.js";
+import { db } from "/src/firebaseConfig.js";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 
 // Import specific functions from the Firebase Auth SDK
 import {
@@ -56,22 +58,44 @@ export async function signupUser(name, email, password) {
     email,
     password
   );
-  await updateProfile(userCredential.user, { displayName: name });
-  return userCredential.user;
+  const user = userCredential.user;
+  await updateProfile(user, { displayName: name });
+
+  try {
+    await setDoc(doc(db, "users", user.uid), {
+      name: name,
+      email: email,
+      country: "Canada", // Default value
+      school: "BCIT", // Default value
+    });
+    //no i don't understand why this works but im not going to FREAKING WORRY ABOUT IT
+    const parentDocRef = doc(db, "users", user.uid);
+    const subcollectionRef = collection(parentDocRef, "tournamentData");
+    await setDoc(doc(subcollectionRef, "placeholderTournament"), {
+      name: "hi",
+      email: "hello",
+    });
+    console.log("Firestore user document created successfully!");
+  } catch (error) {
+    alert("THERE WAS AN ERROR");
+    console.error("Error creating user document in Firestore:", error);
+  }
+
+  return user;
 }
 
 // -------------------------------------------------------------
 // logoutUser()
 // -------------------------------------------------------------
 // Signs out the currently logged-in user and redirects them
-// back to the login page (index.html).
+// back to the login page (login.html).
 //
 // Usage:
 //   await logoutUser();
 // -------------------------------------------------------------
 export async function logoutUser() {
   await signOut(auth);
-  window.location.href = "index.html";
+  window.location.href = "login.html";
 }
 
 // -------------------------------------------------------------
@@ -82,7 +106,7 @@ export async function logoutUser() {
 //
 // If the user is on "main.html":
 //   - If logged in → displays "Hello, [Name]!"
-//   - If not logged in → redirects to "index.html"
+//   - If not logged in → redirects to "login.html"
 //
 // This function should be called once when the page loads.
 //
@@ -96,7 +120,7 @@ export function checkAuthState() {
         const displayName = user.displayName || user.email;
         $("#welcomeMessage").text(`Hello, ${displayName}!`);
       } else {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }
     }
   });
