@@ -16,24 +16,27 @@
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
-
+  <!-- profilePicture, username, bio, friendsList, numOfFriends (friendsList.size) -->
   <body>
     <!------------------------------>
     <!-- HTML Layout goes here -->
     <!------------------------------>
     <site-navbar></site-navbar>
 
-    <!-- Add data entry stuff here :) -->
     <div class="col">
       <div class="card">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="/images/chess-placeholder.png" alt="profile_picture" />
+            <img
+              id="profilePicture"
+              src="/images/chess-placeholder.png"
+              alt="profilePicture"
+            />
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title Username">username here</h5>
-              <p class="card-text">"bio messege could go here"</p>
+              <h5 id="userName" class="card-title">user name here</h5>
+              <p id="bio" class="card-text bio">"Bio-text"</p>
             </div>
             <div class="settings-button"></div>
           </div>
@@ -41,18 +44,15 @@
       </div>
     </div>
 
-    <!-- get a tornament componet -->
+    <!-- get a tornament component -->
     <div class="tornament"></div>
 
-    <!-- will have to get a freind component for each friend listing -->
-    <!-- ignore that top guy, its more like get a 
-      template and fill it for each friend -->
-
+    <!-- will have to get a friend component for each friend listing -->
     <div class="container">
       <div class="friend-buttons row">
         <div class="col">
           <img src="/images/chess-placeholder.png" alt="friends-icon" />
-          <p>Friends(21)</p>
+          <p id="numOfFriends">Friends(21)</p>
         </div>
 
         <div class="col">
@@ -60,30 +60,16 @@
           <p>Add Friends</p>
         </div>
       </div>
+
+      <div class="container row bg-info">
+        <friend-card></friend-card>
+        <friend-card></friend-card>
+        <friend-card></friend-card>
+      </div>
     </div>
 
-    <!-- <div class="container row bg-info">
-        <friend-card></friend-card>
-        <friend-card></friend-card>
-        <friend-card></friend-card>
-      </div> -->
-
-    <template id="SocialsCardTemplate">
-      <div class="row">
-        <div class="col card">
-          <img src="/images/chess-placeholder.png" alt="friend-profile" />
-          <p>friend username</p>
-        </div>
-      </div>
-    </template>
-
-    <div class="container"></div>
-
-    <!---------------------------------------------->
-    <!-- JavaScript functions go here    -->
-    <!---------------------------------------------->
-
     <!-- Link to scripts of your own -->
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/EachFriend.js"></script>
   </body>
 </html>

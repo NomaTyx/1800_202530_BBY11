@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-
+import { db } from "./firebaseConfig.js";
 import { onAuthReady } from "./authentication.js";
 import { doc, onSnapshot, getDoc } from "firebase/firestore";
 import {
@@ -16,6 +16,47 @@ function test() {
     alert("hello");
   });
 }
+
+function addUserData() {
+  const usersRef = collection(db, "users");
+  console.log("adding sample user data");
+  addDoc(usersRef, {
+    code: "BBY01",
+    name: "it",
+    country: "Burnaby",
+    bio: "A lovely place for a lunch walk.",
+    last_updated: serverTimestamp(),
+  });
+  addDoc(usersRef, {
+    code: "BBY01",
+    name: "is",
+    country: "Anmore",
+    bio: "Close to town, and relaxing.",
+    last_updated: serverTimestamp(),
+  });
+  addDoc(usersRef, {
+    code: "BBY01",
+    name: "late",
+    country: "North Vancouver",
+    bio: "Amazing ski slope views.",
+    last_updated: serverTimestamp(),
+  });
+}
+
+async function seedFriends() {
+  const usersRef = collection(db, "users");
+  const querySnapshot = await getDocs(usersRef);
+
+  // Check if the collection is empty
+  if (querySnapshot.empty) {
+    console.log("user collection is empty. seeding data");
+    addUserData();
+  } else {
+    console.log("user collection already contains data. skipping seeds.");
+  }
+}
+
+seedFriends();
 
 // document.addEventListener('DOMContentLoaded', sayHello);
 
