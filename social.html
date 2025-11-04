@@ -44,10 +44,6 @@
     <!-- get a tornament componet -->
     <div class="tornament"></div>
 
-    <!-- will have to get a freind component for each friend listing -->
-    <!-- ignore that top guy, its more like get a 
-      template and fill it for each friend -->
-
     <div class="container">
       <div class="friend-buttons row">
         <div class="col">
@@ -62,28 +58,30 @@
       </div>
     </div>
 
-    <!-- <div class="container row bg-info">
-        <friend-card></friend-card>
-        <friend-card></friend-card>
-        <friend-card></friend-card>
-      </div> -->
-
-    <template id="SocialsCardTemplate">
-      <div class="row">
-        <div class="col card">
-          <img src="/images/chess-placeholder.png" alt="friend-profile" />
-          <p>friend username</p>
-        </div>
+    <div class="container gap-2 bg-info">
+      <div id="friendsGoHere"></div>
+    </div>
+    <template id="socialsCardTemplate">
+      <div class="friend-card row">
+        <img
+          class="card-image col-2"
+          src="/images/chess-placeholder.png"
+          alt="profile"
+        />
+        <a class="friendPage col-3" href="#">
+          <span class="userName">Name</span>
+        </a>
       </div>
     </template>
-
-    <div class="container"></div>
 
     <!---------------------------------------------->
     <!-- JavaScript functions go here    -->
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
+    <script type="module" src="./src/firebaseConfig.js"></script>
+    <script type="module" src="./src/authentication.js"></script>
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/socals.js"></script>
   </body>
 </html>
