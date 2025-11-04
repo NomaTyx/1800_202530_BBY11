@@ -1,13 +1,5 @@
 //import statements
-import {
-  collection,
-  getDocs,
-  addDoc,
-  serverTimestamp,
-  doc,
-  onSnapshot,
-  getDoc,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 import { db } from "./firebaseConfig.js";
 
@@ -36,11 +28,12 @@ async function displayCardsDynamically() {
       const newcard = cardTemplate.content.cloneNode(true);
       const userData = doc.data();
 
-      newcard.querySelector(
-        ".card-image"
-      ).src = `/images/${"chess-placeholder.png"}`;
+      newcard.querySelector(".card-image").src = `/images/${
+        userData.code || "chess-placeholder"
+      }.png`;
+
       const link = newcard.querySelector(".friendPage");
-      link.href = `EachFriend.html?docID=${doc.id}`;
+      link.href = `/src/EachFriend.html?docID=${doc.id}`;
 
       const userName = newcard.querySelector(".userName");
       userName.textContent = userData.name || "Unknown User";
