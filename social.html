@@ -11,6 +11,7 @@
     <!-- Other libraries go here -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+    <script type="module" src="/src/components/friendCard.js"></script>
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
@@ -28,7 +29,7 @@
       <div class="card">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="\images\chess-placeholder.png" alt="profile_picture" />
+            <img src="/images/chess-placeholder.png" alt="profile_picture" />
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -48,24 +49,24 @@
     <div class="container">
       <div class="friend-buttons row">
         <div class="col">
-          <img src="\images\chess-placeholder.png" alt="friends-icon" />
+          <img src="/images/chess-placeholder.png" alt="friends-icon" />
           <p>Friends(21)</p>
         </div>
 
         <div class="col">
-          <img src="\images\chess-placeholder.png" alt="friends-icon" />
+          <img src="/images/chess-placeholder.png" alt="friends-icon" />
           <p>Add Friends</p>
         </div>
       </div>
 
-      <div class="container row">
-        <friendCard></friendCard>
+      <div class="container row bg-info">
+        <friend-card></friend-card>
+        <friend-card></friend-card>
+        <friend-card></friend-card>
       </div>
     </div>
 
-    <div class="container">
-      <site-footer></site-footer>
-    </div>
+    <div class="container"></div>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
