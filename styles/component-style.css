@@ -1,3 +1,39 @@
-.navbar, .navbar-expand-lg, .bg-warning {
-    background-color: #AF8A68;
+site-navbar > .navbar, .navbar-expand-lg, .bg-warning > .container-fluid {
+    background-color: #3B2F23 !important;
+
+    a {
+        color: #ECDAB9;
+    }
+
+    .nav-item > .nav-link, .active {
+        color: #ECDAB9;
+    }
+
+    button {
+        color: #ECDAB9;
+        border-color: #ECDAB9;
+    }
+
+    button:hover {
+        color: #1E1812;
+        border-color: #AF8A68;
+        background-color: #AF8A68;
+    }
+
+    #authControls a {
+        color: #ECDAB9;
+        border-color: #ECDAB9;
+    }
+
+    #authControls a:hover {
+        color: #1E1812;
+        border-color: #AF8A68;
+        background-color: #AF8A68;
+    }
+}
+
+site-footer > .py-3, .my-4, .border-top, .text-center {
+    .mb-0, .text-muted {
+        color: #3B2F23 !important;
+    }
 }
