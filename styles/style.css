@@ -54,6 +54,10 @@
 .container, .text-center {
     padding: 2%;
 
+    .filter-buttons {
+        margin-bottom: 2%;
+    }
+
     .btn, .btn-warning, .btn-lg {
         width: 25%;
     }
