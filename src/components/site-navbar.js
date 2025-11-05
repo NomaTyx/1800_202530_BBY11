@@ -1,3 +1,5 @@
+import '/styles/component-style.css';
+
 // Import specific functions from the Firebase Auth SDK
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "/src/firebaseConfig.js";
