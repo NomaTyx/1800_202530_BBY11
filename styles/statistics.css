@@ -1,0 +1,26 @@
+.container, .text-center {
+    padding: 2%;
+
+    .filter-buttons {
+        margin-bottom: 2%;
+
+        .btn, .btn-lg, .btn-warning {
+            width: 25%;
+            color: #3B2F23;
+            border-color: #AF8A68;
+            background-color: #AF8A68;
+        }
+
+        button:hover {
+            color: #AF8A68;
+            border-color: #3B2F23;;
+            background-color: #3B2F23;
+        }
+
+        button:active {
+            color: #3B2F23;
+            border-color: #FDFBF8;
+            background-color: #FDFBF8;
+        }
+    }    
+}

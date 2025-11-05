@@ -8,38 +8,44 @@
 */
 
 .container, .col-xl-10, .col-xxl-8, .px-4, .py-5 {
-    color: #1E1812;
+    color: #3B2F23 !important;
 
     .p-4, .p-md-5, .border, .rounded-3, .bg-body-tertiary {
         background-color: #F7F3F0 !important;
     }
 
     .form-floating, .mb-3 {
-        color: #1E1812;
+        color: #3B2F23;
 
         label {
-            color: #1E1812;
+            color: #3B2F23;
         }
     }
 
     .checkbox, .mb-3 {
-        color: #1E1812;
+        color: #3B2F23;
     }
 
     .w-100, .btn, .btn-lg, .btn-warning {
-        color: #1E1812;
+        color: #3B2F23;
         border-color: #AF8A68;
         background-color: #AF8A68;
     }
 
     button:hover {
         color: #AF8A68;
-        border-color: #1E1812;
-        background-color: #1E1812;
+        border-color: #3B2F23;
+        background-color: #3B2F23;
+    }
+
+    button:active {
+        color: #3B2F23;
+        border-color: #FDFBF8;
+        background-color: #FDFBF8;
     }
 
     small {
-        color: #1E1812 !important;
+        color: #3B2F23 !important;
     }
 
     a {
@@ -48,18 +54,6 @@
 
     a:hover {
         color: #3B2F23;
-    }
-}
-
-.container, .text-center {
-    padding: 2%;
-
-    .filter-buttons {
-        margin-bottom: 2%;
-    }
-
-    .btn, .btn-warning, .btn-lg {
-        width: 25%;
     }
 }
 

@@ -1,23 +1,23 @@
 site-navbar > .navbar, .navbar-expand-lg, .bg-warning > .container-fluid {
-    background-color: #3B2F23 !important;
+    background-color: #AF8A68 !important;
 
     a {
-        color: #ECDAB9;
+        color: #3B2F23;
     }
 
     .nav-item > .nav-link, .active {
-        color: #ECDAB9;
+        color: #3B2F23;
     }
 
     button {
-        color: #ECDAB9;
-        border-color: #ECDAB9;
+        color: #3B2F23;
+        border-color: #3B2F23;
     }
 
     button:hover {
-        color: #1E1812;
-        border-color: #AF8A68;
-        background-color: #AF8A68;
+        color: #3B2F23;
+        border-color: #3B2F23;
+        background-color: #3B2F23;
     }
 
     #authControls a {
@@ -26,7 +26,7 @@ site-navbar > .navbar, .navbar-expand-lg, .bg-warning > .container-fluid {
     }
 
     #authControls a:hover {
-        color: #1E1812;
+        color: #3B2F23;;
         border-color: #AF8A68;
         background-color: #AF8A68;
     }
