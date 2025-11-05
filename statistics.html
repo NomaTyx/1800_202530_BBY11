@@ -24,11 +24,19 @@
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
-    <!-- <img src="..." class="rounded mx-auto d-block" alt="..."> -->
-    <div class="container text-center">
+    <div class="container text-center"> 
+      <!-- Not sure how the graph will function, but for now I used reactive image. -->
+      <div class="text-center">
+        <img src="..." class="img-fluid" alt="Placeholder for Graph">
+      </div>
+
       <button type="button" class="btn btn-warning btn-lg">White</button>
       <button type="button" class="btn btn-warning btn-lg">Black</button>
 
+      <!-- Excuse the hard coded breaks, I'm too tired to figure out css rn -->
+      <br><br>
+
+      <!-- I'm not sure if this will be the final way to get the date, but this will have to do. -->
       <div class="form-floating mb-3">
         <input type="date" class="form-control" id="floatingStartDate">
         <label for="floatingInput">Start Date</label>
@@ -48,5 +56,6 @@
 
     <!-- Link to scripts of your own -->
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/statistics.js"></script>
   </body>
 </html>

@@ -51,6 +51,14 @@
     }
 }
 
+.container, .text-center {
+    padding: 2%;
+
+    .btn, .btn-warning, .btn-lg {
+        width: 25%;
+    }
+}
+
 body {
     background-color: #ECDAB9;
 }
