@@ -1,4 +1,4 @@
-class TournamentCard extends HTMLElement {
+class NewTournamentCard extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
     <div class="card" style="width: 18rem">
@@ -15,4 +15,4 @@ class TournamentCard extends HTMLElement {
   }
 }
 
-customElements.define("tournament-card", TournamentCard);
+customElements.define("new-tournament-card", NewTournamentCard);

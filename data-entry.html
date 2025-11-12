@@ -11,6 +11,8 @@
     <!-- Other libraries go here -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+    <script type="module" src="./src/components/tournament-card.js"></script>
+    <script type="module" src="./src/components/new-tournament-card.js"></script>
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
@@ -24,10 +26,13 @@
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
-    
+
     <div class="container">
-      <site-footer></site-footer>
+      <tournament-card></tournament-card>
+      <new-tournament-card></new-tournament-card>
     </div>
+
+    <site-footer></site-footer>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
@@ -35,5 +40,6 @@
 
     <!-- Link to scripts of your own -->
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/data-entry.js"></script>
   </body>
 </html>
