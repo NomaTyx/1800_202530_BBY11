@@ -11,6 +11,9 @@
     <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+
+    <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/style.css" />
   </head>
 
   <body>
@@ -21,12 +24,13 @@
     <site-navbar></site-navbar>
 
     <!-- Main content goes here -->
+    <button class="card text-center w-100 newRoundButton">new round</button>
 
     <site-footer></site-footer>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript scripts go here      -->
     <!---------------------------------------------->
-    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
