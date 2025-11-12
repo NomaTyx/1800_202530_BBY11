@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Data Entry Screen</title>
+    <title>Tournament Select Screen</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
@@ -24,17 +24,17 @@
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
-    <div class="container" id="cardholder">
+    <div class="container align-items-center justify-content-center" id="cardholder">
       <template id="cardTemplate">
-        <a class="card text-center">
+        <button class="card text-center w-100">
           <h5 class="tournamentName">tournament name will probably be long</h5>
           <span class="roundsText">Rounds: x</span>
           <span class="scoreText">Score: y/x</span>
           <span class="dateText">m/d/y - m/d/y</span>
-        </a>
+        </button>
       </template>
       <template id="newTourneyTemplate">
-        <a class="card text-center">
+        <button class="card text-center w-100">
           <div class="card-body">
             <img
               src="/images/plus.png"
@@ -44,7 +44,7 @@
             />
             <h5 class="card-title text-center">New Tournament</h5>
           </div>
-        </a>
+        </button>
       </template>
     </div>
 
@@ -56,6 +56,6 @@
 
     <!-- Link to scripts of your own -->
     <script type="module" src="./src/main.js"></script>
-    <script type="module" src="./src/data-entry.js"></script>
+    <script type="module" src="./src/tournament-select.js"></script>
   </body>
 </html>
