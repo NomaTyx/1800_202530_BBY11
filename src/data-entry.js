@@ -15,34 +15,52 @@ async function loadCards() {
     if (user) {
       currUser = user;
       const uid = user.uid;
-      const cardholder = document.getElementById("cardholder");
+      let template = document.getElementById("cardTemplate");
       const userTournamentsRef = collection(db, "users", uid, "tournamentData");
 
       let divTemplate = `<div class="row">`;
+
       //basically the way this works is we make a div with a row, add three cards, then make another one.
       //it all has to be added at once, so we're going to ad deverything to a string variable that we then add at the end
       let str = divTemplate;
+
       //first card should always be the "new" button because it should be the easiest to see
       str += `<div class="col-md-4">
           <new-tournament-card class="col"></new-tournament-card>
         </div>`;
       const querySnapshot = await getDocs(userTournamentsRef);
       let i = 1;
+
       querySnapshot.forEach((doc) => {
+        // Clone the template
+        let newcard = template.content.cloneNode(true);
+
+        let numRounds = 0;
+        let score = 0;
+        let test = doc.data();
+
+        for (let j = 1; j <= Object.keys(doc.data()).length; j++) {
+          score += doc.data()[j]["result"];
+          numRounds++;
+        }
+
+        newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
+        newcard.querySelector(".scoreText").textContent = "Score: " + score;
+
         //every third card, end the row div and start a new one
         if (i % 3 == 0) {
           str += `</div>` + divTemplate;
         }
-        //generating a new tournament card every iteration
-        str += `<div class="col-md-4">
-    <tournament-card class="col"></tournament-card>
-    </div>`;
+
         i++;
+
+        // Attach the new card to the container
+        document.getElementById("cardholder").appendChild(newcard);
       });
+
       //since a new div was started and not finished in the loop, we must finish it out here.
       str += "</div>";
-
-      cardholder.innerHTML += str;
+      template.innerHTML += str;
     } else {
       location.href = "login.html";
     }
@@ -129,5 +147,5 @@ function addTourneyData() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", loadCards);
 document.addEventListener("DOMContentLoaded", seedTourneys);
+document.addEventListener("DOMContentLoaded", loadCards);
