@@ -27,22 +27,27 @@
     <div class="container text-center"> 
       <!-- Not sure how the graph will function, but for now I used reactive image. -->
       <div class="text-center">
+        <h1>Win Rate</h1>
         <img src="..." class="img-fluid" alt="Placeholder for Graph">
       </div>
 
       <div class="filter-buttons">
+        <h1>Colour Played</h1>
         <button type="button" class="btn btn-warning btn-lg">White</button>
         <button type="button" class="btn btn-warning btn-lg">Black</button>
       </div>
 
       <!-- I'm not sure if this will be the final way to get the date, but this will have to do. -->
-      <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="floatingStartDate">
-        <label for="floatingInput">Start Date</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="floatingEndDate">
-        <label for="floatingPassword">End Date</label>
+      <h1>Date Range</h1>
+      <div class="input-group mb-3">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="floatingStartDate">
+          <label for="floatingInput" id="startDate">Start Date</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="floatingEndDate">
+          <label for="floatingInput" id="endDate">End Date</label>
+        </div>
       </div>
     </div>
 

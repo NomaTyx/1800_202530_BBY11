@@ -1,6 +1,11 @@
 .container, .text-center {
     padding: 2%;
 
+    h1 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
     .filter-buttons {
         margin-bottom: 2%;
 
@@ -22,5 +27,5 @@
             border-color: #FDFBF8;
             background-color: #FDFBF8;
         }
-    }    
+    }
 }

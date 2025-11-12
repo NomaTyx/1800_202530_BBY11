@@ -1,5 +1,5 @@
 import { db } from "./firebaseConfig.js";
-import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, getDocs, addDoc, serverTimestamp, onSnapshot } from "firebase/firestore";
 
 // This is just to get the stats reader to work :/
 function addTournamentData() {
@@ -35,9 +35,14 @@ async function seedtournamentData() {
  
 seedtournamentData();
 
+function getTournamentData(data) {
+    const userRef = doc(db, "users", userID);
+    const tournamentData = doc();
+}
+
 // This is to get the actual(?) read function to work
 async function displayTournamentData() {
-    //let;
+    // Code goes here :/
 }
 
 displayTournamentData();
