@@ -1,6 +1,5 @@
 //import statements
 import { collection, getDocs } from "firebase/firestore";
-
 import { db } from "./firebaseConfig.js";
 
 async function displayCardsDynamically() {
