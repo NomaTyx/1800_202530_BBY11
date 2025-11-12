@@ -26,15 +26,21 @@
     <!-- Add data entry stuff here :) -->
     <div class="container" id="cardholder">
       <template id="cardTemplate">
-        <div class="card" style="width: 18rem">
-          <h5 class="card-title">tournament name will probably be long</h5>
-          <div>
-            <span class="roundsText">Rounds: x</span>
-            <span class="scoreText">Score: y/x</span>
-            <span class="beginningMonthText">m/d/y</span> -
-            <span class="endingMonthText">m/d/y</span>
-          </div>
+        <div class="card">
+          <h5 class="tournamentName">tournament name will probably be long</h5>
+          <span class="roundsText">Rounds: x</span>
+          <span class="scoreText">Score: y/x</span>
+          <span class="beginningMonthText">m/d/y</span> -
+          <span class="endingMonthText">m/d/y</span>
         </div>
+      </template>
+      <template id="newTourneyTemplate">
+        <a class="card">
+          <div class="card-body">
+            <img src="/images/plus.png" alt="add new tourney" class="img-fluid" />
+            <h5 class="card-title text-center">new tourney</h5>
+          </div>
+        </a>
       </template>
     </div>
 
