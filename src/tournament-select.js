@@ -5,6 +5,7 @@ import "/styles/component-style.css";
 import { doc, collection, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
+import { editCurrentPage } from "/src/data-entry.js";
 
 let currUser;
 
@@ -26,7 +27,6 @@ async function loadCards() {
 
       querySnapshot.forEach((doc) => {
         let newcard = cardTemplate.content.cloneNode(true);
-        // Clone the template
         let numRounds = 0;
         let score = 0;
 
@@ -38,7 +38,7 @@ async function loadCards() {
         newcard.querySelector(".tournamentName").textContent = doc.id;
         newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
         newcard.querySelector(".scoreText").textContent = "Score: " + score;
-
+        newcard.querySelector(".viewTournamentButton").href = "data-entry.html";
         cardContainer.appendChild(newcard);
       });
     } else {
