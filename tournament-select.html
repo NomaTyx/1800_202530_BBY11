@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Data Entry Screen</title>
+    <title>Tournament Select Screen</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
@@ -24,20 +24,31 @@
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
-    <div class="card" style="width: 18rem">
-      <img class="card-img-top" src="..." alt="Card image cap" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
+    <div class="container align-items-center justify-content-center" id="cardholder">
+      <template id="cardTemplate">
+        <button class="card text-center w-100">
+          <h5 class="tournamentName">tournament name will probably be long</h5>
+          <span class="roundsText">Rounds: x</span>
+          <span class="scoreText">Score: y/x</span>
+          <span class="dateText">m/d/y - m/d/y</span>
+        </button>
+      </template>
+      <template id="newTourneyTemplate">
+        <button class="card text-center w-100">
+          <div class="card-body">
+            <img
+              src="/images/plus.png"
+              alt="add new tourney"
+              class="card-img-top"
+              style="max-width: 100px"
+            />
+            <h5 class="card-title text-center">New Tournament</h5>
+          </div>
+        </button>
+      </template>
     </div>
-    <div class="container">
-      <site-footer></site-footer>
-    </div>
+
+    <site-footer></site-footer>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
@@ -45,5 +56,6 @@
 
     <!-- Link to scripts of your own -->
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/tournament-select.js"></script>
   </body>
 </html>

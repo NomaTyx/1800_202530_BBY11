@@ -1,4 +1,4 @@
-import '/styles/component-style.css';
+import "/styles/component-style.css";
 
 // Import specific functions from the Firebase Auth SDK
 import { onAuthStateChanged } from "firebase/auth";
@@ -41,7 +41,7 @@ class SiteNavbar extends HTMLElement {
               <a class="nav-link active" aria-current="page" href="login.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="data-entry.html">Tournaments</a>
+              <a class="nav-link" href="tournament-select.html">Tournaments</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="statistics.html">Statistics</a>
