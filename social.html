@@ -18,16 +18,13 @@
   </head>
 
   <body>
-    <!------------------------------>
-    <!-- HTML Layout goes here -->
-    <!------------------------------>
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
     <div class="col">
       <div class="card">
         <div class="row g-0">
-          <div class="col-md-4">
+          <div class="d-flex justify-content-center User_profile col-md-4">
             <img src="/images/chess-placeholder.png" alt="profile_picture" />
           </div>
           <div class="col-md-8">
@@ -46,31 +43,34 @@
 
     <div class="container">
       <div class="friend-buttons row">
-        <div class="col">
+        <div class="col-6">
           <img src="/images/chess-placeholder.png" alt="friends-icon" />
           <p>Friends(21)</p>
         </div>
 
-        <div class="col">
+        <div class="col-6">
           <img src="/images/chess-placeholder.png" alt="friends-icon" />
-          <p>Add Friends</p>
+          <a href="add-friend.html" id="add_friend">Add Friends</a>
         </div>
       </div>
     </div>
 
-    <div class="container gap-2 bg-info">
+    <div class="container gap-2">
       <div id="friendsGoHere"></div>
     </div>
+
     <template id="socialsCardTemplate">
-      <div class="friend-card row">
+      <div class="row friend-card col-6">
         <img
-          class="card-image col-2"
-          src="/images/chess-placeholder.png"
+          class="card-image col-4 img-fluid"
+          src="public\images\chess-placeholder.png"
           alt="profile"
         />
-        <a class="friendPage col-3" href="#">
-          <span class="userName">Name</span>
-        </a>
+        <div class="friendPage col-12 text-end">
+          <a href="#">
+            <span class="userName">Name</span>
+          </a>
+        </div>
       </div>
     </template>
 

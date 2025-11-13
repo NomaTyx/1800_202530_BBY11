@@ -1,29 +1,26 @@
-//import statements
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig.js";
 
+//gets the DOM, and updates it, true means it recusivly
+// clones all elements of db i assume
+
+const cardTemplate = document.getElementById("FriendsOfFriend");
+const userName = document.getElementById("socialsUserName");
+const bio = document.getElementById("Bio");
+const container = document.getElementById("friendsFriendslist");
+
 async function displayCardsDynamically() {
-  const cardTemplate = document.getElementById("socialsCardTemplate");
-  const container = document.getElementById("friendsGoHere");
-
-  //create databaste referance constant vs var in js
-
   if (!container) {
-    console.error("friendsGoHere container not found");
-    return;
+    console.error("Cant find firendsFriends container");
   }
   if (!cardTemplate) {
-    console.error("socialsCardTemplate container not found");
-    return;
+    console.error("Can't find SocailsCardTemplate");
   }
-
-  //try catch for created the dynamic cards
   try {
-    const friendsList = collection(db, "users");
-    const queryFriendsListSnapshot = await getDocs(friendsList);
+    const userList = collection(db, "users");
+    const queryUserListSnapshot = await getDocs(userList);
 
-    queryFriendsListSnapshot.forEach((doc) => {
-      //clone of card template
+    queryUserListSnapshot.forEach((doc) => {
       const newcard = cardTemplate.content.cloneNode(true);
       const userData = doc.data();
 
@@ -37,11 +34,10 @@ async function displayCardsDynamically() {
       const userName = newcard.querySelector(".userName");
       userName.textContent = userData.name || "Unknown User";
 
-
       container.appendChild(newcard);
     });
 
-    console.log(`Successfully loaded ${queryFriendsListSnapshot.size} friends`);
+    console.log(`Successfully loaded ${queryUserListSnapshot.size} friends`);
   } catch (error) {
     console.error("Error getting documents: ", error);
   }
