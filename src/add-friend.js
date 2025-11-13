@@ -19,7 +19,6 @@ async function displayCardsDynamically() {
   try {
     const userList = collection(db, "users");
     const queryUserListSnapshot = await getDocs(userList);
-
     queryUserListSnapshot.forEach((doc) => {
       const newcard = cardTemplate.content.cloneNode(true);
       const userData = doc.data();
@@ -36,8 +35,11 @@ async function displayCardsDynamically() {
 
       container.appendChild(newcard);
     });
-
     console.log(`Successfully loaded ${queryUserListSnapshot.size} friends`);
+
+    const numOfUsersFriends = friendIds.length;
+    document.getElementById("numOfUsersFriends").textContent =
+      "Friends (" + numOfUsersFriends + ")";
   } catch (error) {
     console.error("Error getting documents: ", error);
   }
