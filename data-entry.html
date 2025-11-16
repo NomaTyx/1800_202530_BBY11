@@ -11,6 +11,8 @@
     <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
@@ -24,7 +26,70 @@
     <site-navbar></site-navbar>
 
     <!-- Main content goes here -->
-    <button class="card text-center w-100 newRoundButton">new round</button>
+    <div class="accordion" id="accordionExample">
+      <div id="errorWithInput" class="alert alert-danger d-none" role="alert"></div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Add round
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <form
+              id="roundInputForm"
+              class="p-4 p-md-5 border rounded-3 bg-body-tertiary"
+              novalidate
+            >
+              <div class="mb-3">
+                <input
+                  type="text"
+                  id="opponentNameInput"
+                  class="form-control"
+                  placeholder="Opponent name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <select id="colorInput" class="form-control">
+                  <option value="bhite">White</option>
+                  <option value="black">Black</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <select id="resultInput" class="form-control">
+                  <option value="1">Won</option>
+                  <option value="0">Lost</option>
+                  <option value="0.5">Drew</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <input
+                  type="date"
+                  id="dateInput"
+                  class="form-control"
+                  placeholder="date"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Add round</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <site-footer></site-footer>
 
@@ -32,5 +97,6 @@
     <!-- Your own JavaScript scripts go here      -->
     <!---------------------------------------------->
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/data-entry.js"></script>
   </body>
 </html>

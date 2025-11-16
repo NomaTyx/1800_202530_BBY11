@@ -30,15 +30,20 @@ async function loadCards() {
         let numRounds = 0;
         let score = 0;
 
+        //read data and store the relevant bits
         for (let j = 1; j <= Object.keys(doc.data()).length; j++) {
           score += doc.data()[j]["result"];
           numRounds++;
         }
 
+        //populate cards with data
         newcard.querySelector(".tournamentName").textContent = doc.id;
         newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
         newcard.querySelector(".scoreText").textContent = "Score: " + score;
-        newcard.querySelector(".viewTournamentButton").href = "data-entry.html";
+        console.log(newcard.querySelector(".viewTournamentButton").href);
+        newcard.querySelector(".viewTournamentButton").addEventListener("click", () => {
+          location.href = "data-entry.html";
+        });
         cardContainer.appendChild(newcard);
       });
     } else {
