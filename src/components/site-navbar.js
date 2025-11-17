@@ -21,7 +21,7 @@ class SiteNavbar extends HTMLElement {
     <nav class="navbar navbar-expand-lg bg-warning">
       <div class="container-fluid">
         <a class="navbar-brand" href="login.html">
-          <img src="./images/chess-placeholder.png" height="36" />
+          <img src="./images/chess-placeholder.svg" height="36" />
           UTT
         </a>
         <button

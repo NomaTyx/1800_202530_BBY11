@@ -1,3 +1,11 @@
+/* Colour Hex Codes
+#FDFBF8 - really light beige (Not sure if it's needed)
+#F7F3F0 - really light brown
+#ECDAB9 - light biege(?)
+#AF8A68 - light brown
+#3B2F23 - dark brown
+#1E1812 - really dark brown
+*/
 .Username {
   font-weight: 800;
 }
@@ -14,3 +22,11 @@
   text-decoration: none;
   font-size: larger;
 }
+
+.user-info {
+  background: #af8a68;
+}
+
+/* .add_friends_button {
+  
+} */
