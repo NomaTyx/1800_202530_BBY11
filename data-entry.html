@@ -40,6 +40,15 @@
         />
       </div>
       <div class="mb-3">
+        <input
+          type="text"
+          id="opponentRatingInput"
+          class="form-control"
+          placeholder="Opponent rating"
+          required
+        />
+      </div>
+      <div class="mb-3">
         <select id="colorInput" class="form-control">
           <option value="white">White</option>
           <option value="black">Black</option>
@@ -96,6 +105,15 @@
                     />
                   </div>
                   <div class="mb-3">
+                    <input
+                      type="text"
+                      id="existingOpponentRatingInput"
+                      class="form-control"
+                      placeholder="Opponent rating"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
                     <select id="existingColorInput" class="form-control">
                       <option value="white">White</option>
                       <option value="black">Black</option>
@@ -117,9 +135,7 @@
                       required
                     />
                   </div>
-                  <button type="submit" class="btn btn-primary w-100" id="editroundbutton">
-                    Edit round
-                  </button>
+                  <button type="submit" class="btn btn-primary w-100">Edit round</button>
                 </form>
               </div>
             </div>

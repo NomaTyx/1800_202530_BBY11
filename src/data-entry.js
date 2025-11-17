@@ -1,24 +1,40 @@
-import { doc, getDoc, collection, getDocs, setDoc, addDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, setDoc, addDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 const alertEl = document.getElementById("errorWithInput");
 const roundInputForm = document.getElementById("roundInputForm");
+const params = new URL(window.location.href).searchParams;
 
 roundInputForm?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const oppName = document.querySelector("#opponentNameInput")?.value?.trim() ?? "";
-  const color = document.querySelector("#colorInput")?.value?.trim() ?? "";
-  const result = document.querySelector("#resultInput")?.value ?? "";
-  const date = document.querySelector("#dateInput")?.value ?? "";
-  if (!oppName || !color || !date || !result) {
-    showError("Please fill in all fields.");
-    return;
-  }
-  console.log(color);
-  console.log(result);
-  console.log(oppName);
-  console.log(date);
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      //stops the form from refreshing the page
+      e.preventDefault();
+
+      //grab values from form
+      const oppName = document.querySelector("#opponentNameInput")?.value?.trim() ?? "";
+      const color = document.querySelector("#colorInput")?.value?.trim() ?? "";
+      const result = document.querySelector("#resultInput")?.value ?? "";
+      const date = document.querySelector("#dateInput")?.value ?? "";
+      const rating = document.querySelector("#opponentRatingInput")?.value ?? "";
+
+      const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
+      let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
+      let i = Object.keys(tournamentDoc.data()).length;
+
+      await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
+        //set the round number with all the data
+        [i + 1]: {
+          "color": color,
+          "opponentName": oppName,
+          "result": result,
+          "date": date,
+          "opponentRating": rating,
+        },
+      });
+    }
+  });
 });
 
 async function loadCards() {
@@ -27,7 +43,6 @@ async function loadCards() {
       let roundTemplate = document.getElementById("roundTemplate");
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
 
-      let params = new URL(window.location.href).searchParams;
       //grab the specified tournament doc
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
 
@@ -36,16 +51,51 @@ async function loadCards() {
         let roundClone = roundTemplate.content.cloneNode(true);
         //populate cards with data (each round has its own data
         roundClone.querySelector("#roundnumber").textContent = `Round ${i}`;
+
         roundClone.querySelector("#existingOpponentNameInput").value =
-          tournamentDoc.data()[i]["opponentName"];
-        roundClone.querySelector("#existingColorInput").value = tournamentDoc.data()[i]["color"];
-        roundClone.querySelector("#existingResultInput").value = tournamentDoc.data()[i]["result"];
-        //roundClone.querySelector("#existingDateInput").value = tournamentDoc[i][];
+          tournamentDoc.data()[i]["opponentName"] ?? "";
+
+        roundClone.querySelector("#existingOpponentRatingInput").value =
+          tournamentDoc.data()[i]["opponentRating"] ?? "";
+
+        roundClone.querySelector("#existingColorInput").value =
+          tournamentDoc.data()[i]["color"] ?? "";
+
+        roundClone.querySelector("#existingResultInput").value =
+          tournamentDoc.data()[i]["result"] ?? "";
+
+        roundClone.querySelector("#existingDateInput").value =
+          tournamentDoc.data()[i]["date"] ?? "";
 
         //here is where we set the IDs so that the accordion buttons can communicate with each other
         roundClone.querySelector("#roundnumber").dataset.bsTarget = `#collapse${i}`;
         roundClone.querySelector("#collapse1").id = `collapse${i}`;
 
+        roundClone
+          .querySelector("#existingRoundInputForm")
+          .addEventListener("submit", async (e) => {
+            //stops the form from refreshing the page
+            e.preventDefault();
+
+            //grab values from form
+            const oppName =
+              document.querySelector("#existingOpponentNameInput")?.value?.trim() ?? "";
+            const color = document.querySelector("#existingColorInput")?.value?.trim() ?? "";
+            const result = document.querySelector("#existingResultInput")?.value ?? "";
+            const date = document.querySelector("#existingDateInput")?.value ?? "";
+            const rating = document.querySelector("#existingOpponentRatingInput")?.value ?? "";
+
+            await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
+              //set the round number
+              [i]: {
+                "color": color,
+                "opponentName": oppName,
+                "result": result,
+                "date": date,
+                "opponentRating": rating,
+              },
+            });
+          });
         document.getElementById("roundholder").appendChild(roundClone);
       }
     } else {

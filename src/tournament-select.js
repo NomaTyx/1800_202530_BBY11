@@ -26,6 +26,9 @@ async function loadCards() {
         await setDoc(doc(subcollectionRef, document.querySelector("#tournamentNameInput").value), {
           1: "placeholder!!! lowk you shouldnt be seeing this",
         });
+        location.href = `data-entry.html?tournamentid=${
+          document.querySelector("#tournamentNameInput").value
+        }`;
       });
       cardContainer.appendChild(newTourneyClone);
 
