@@ -14,6 +14,7 @@
     <script type="module" src="/src/components/friendCard.js"></script>
 
     <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/socals-style.css" />
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
 
@@ -25,14 +26,24 @@
       <div class="card">
         <div class="row g-0">
           <div class="d-flex justify-content-center User_profile col-md-4">
-            <img src="/images/chess-placeholder.png" alt="profile_picture" />
+            <img
+              src="/images/chess-placeholder.png"
+              alt="profile_picture"
+              class="rounded-circle"
+            />
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title Username">username here</h5>
-              <p class="card-text">"bio messege could go here"</p>
+              <h5 class="card-title Username">Username here</h5>
+              <div class="bio-box card">
+                <p class="card-text">"bio messege could go here"</p>
+              </div>
             </div>
-            <div class="settings-button"></div>
+            <div class="settings-button text-end">
+              <a href="friend-settings.html"
+                ><img src="/images/settingsCog.svg" alt="settings_cog"
+              /></a>
+            </div>
           </div>
         </div>
       </div>
@@ -55,18 +66,18 @@
       </div>
     </div>
 
-    <div class="container gap-2">
+    <div class="container">
       <div id="friendsGoHere"></div>
     </div>
 
     <template id="socialsCardTemplate">
-      <div class="row friend-card col-6">
+      <div class="row friend-card p-3 border mb-3">
         <img
-          class="card-image col-4 img-fluid"
+          class="card-image col-2 img-fluid"
           src="public\images\chess-placeholder.png"
           alt="profile"
         />
-        <div class="friendPage col-12 text-end">
+        <div class="friendPage col-6 text-end">
           <a href="#">
             <span class="userName">Name</span>
           </a>

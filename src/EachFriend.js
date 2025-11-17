@@ -7,7 +7,6 @@ function getDocIDFromUrl() {
   return params.get("docID");
 }
 
-
 //Fetch friend and display its name and image
 async function displayFriendInfo() {
   const id = getDocIDFromUrl();
