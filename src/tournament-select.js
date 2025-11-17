@@ -2,11 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "/styles/component-style.css";
 
-import { doc, collection, getDocs, setDoc } from "firebase/firestore";
+import { doc, collection, getDocs, setDoc, addDoc } from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
-import { editCurrentPage } from "/src/data-entry.js";
-
 let currUser;
 
 async function loadCards() {
@@ -21,7 +19,15 @@ async function loadCards() {
       let newTourneyTemplate = document.getElementById("newTourneyTemplate");
 
       //first card should always be the "new" button because it should be the easiest to see
-      cardContainer.appendChild(newTourneyTemplate.content.cloneNode(true));
+      let newTourneyClone = newTourneyTemplate.content.cloneNode(true);
+      newTourneyClone.querySelector(".makeNewTourneyButton").addEventListener("click", async () => {
+        const parentDocRef = doc(db, "users", uid);
+        const subcollectionRef = collection(parentDocRef, "tournamentData");
+        await setDoc(doc(subcollectionRef, document.querySelector("#tournamentNameInput").value), {
+          1: "placeholder!!! lowk you shouldnt be seeing this",
+        });
+      });
+      cardContainer.appendChild(newTourneyClone);
 
       const querySnapshot = await getDocs(userTournamentsRef);
 
@@ -40,9 +46,8 @@ async function loadCards() {
         newcard.querySelector(".tournamentName").textContent = doc.id;
         newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
         newcard.querySelector(".scoreText").textContent = "Score: " + score;
-        console.log(newcard.querySelector(".viewTournamentButton").href);
-        newcard.querySelector(".viewTournamentButton").addEventListener("click", () => {
-          location.href = "data-entry.html";
+        newcard.querySelector(".viewTournamentButton").addEventListener("click", async () => {
+          location.href = `data-entry.html?tournamentid=${doc.id}`;
         });
         cardContainer.appendChild(newcard);
       });
