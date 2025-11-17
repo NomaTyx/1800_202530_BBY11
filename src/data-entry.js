@@ -33,6 +33,7 @@ roundInputForm?.addEventListener("submit", async (e) => {
           "opponentRating": rating,
         },
       });
+      location.reload();
     }
   });
 });
@@ -95,6 +96,7 @@ async function loadCards() {
                 "opponentRating": rating,
               },
             });
+            location.reload();
           });
         document.getElementById("roundholder").appendChild(roundClone);
       }
