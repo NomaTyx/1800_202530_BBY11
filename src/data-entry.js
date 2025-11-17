@@ -28,16 +28,24 @@ async function loadCards() {
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
 
       let params = new URL(window.location.href).searchParams;
+      //grab the specified tournament doc
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
+
+      //the tournament docs consist of maps (one map per round), so we loop through each one
       for (let i = 1; i <= Object.keys(tournamentDoc.data()).length; i++) {
         let roundClone = roundTemplate.content.cloneNode(true);
-        //populate cards with data
+        //populate cards with data (each round has its own data
         roundClone.querySelector("#roundnumber").textContent = `Round ${i}`;
         roundClone.querySelector("#existingOpponentNameInput").value =
           tournamentDoc.data()[i]["opponentName"];
         roundClone.querySelector("#existingColorInput").value = tournamentDoc.data()[i]["color"];
         roundClone.querySelector("#existingResultInput").value = tournamentDoc.data()[i]["result"];
         //roundClone.querySelector("#existingDateInput").value = tournamentDoc[i][];
+
+        //here is where we set the IDs so that the accordion buttons can communicate with each other
+        roundClone.querySelector("#roundnumber").dataset.bsTarget = `#collapse${i}`;
+        roundClone.querySelector("#collapse1").id = `collapse${i}`;
+
         document.getElementById("roundholder").appendChild(roundClone);
       }
     } else {
