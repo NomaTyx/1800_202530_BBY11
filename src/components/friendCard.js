@@ -3,7 +3,7 @@ class FriendCard extends HTMLElement {
     this.innerHTML = `
     <div class="row">   
         <div class="col">
-            <img src="/images/chess-placeholder.png" alt="friend-profile" />
+            <img src="/images/chess-placeholder.svg" alt="friend-profile" />
         </div>
         <div class="col">
             <p>friend username</p>

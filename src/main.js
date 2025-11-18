@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-import '/styles/style.css';
+import "/styles/style.css";
 
 import { db } from "./firebaseConfig.js";
 import { onAuthReady } from "./authentication.js";
@@ -71,20 +71,6 @@ async function seedFriends() {
     console.log("user collection already contains data. skipping seeds.");
   }
 }
-
-async function debugFetch() {
-  console.log("debugFetch start");
-  try {
-    const col = collection(db, "users");
-    const snap = await getDocs(col);
-    console.log("getDocs success. doc count =", snap.size);
-    snap.forEach((d) => console.log("doc:", d.id, d.data()));
-  } catch (err) {
-    console.error("getDocs error:", err);
-  }
-}
-document.addEventListener("DOMContentLoaded", debugFetch);
-
 seedFriends();
 
 // document.addEventListener('DOMContentLoaded', sayHello);

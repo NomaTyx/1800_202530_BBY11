@@ -53,7 +53,11 @@ export async function loginUser(email, password) {
 //   const user = await signupUser("Alice", "alice@email.com", "secret");
 // -------------------------------------------------------------
 export async function signupUser(name, email, password) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
   const user = userCredential.user;
   await updateProfile(user, { displayName: name });
 
@@ -71,7 +75,6 @@ export async function signupUser(name, email, password) {
       name: "hi",
       email: "hello",
     });
-    console.log("Firestore user document created successfully!");
   } catch (error) {
     alert("THERE WAS AN ERROR");
     console.error("Error creating user document in Firestore:", error);
