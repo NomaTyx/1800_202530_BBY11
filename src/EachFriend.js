@@ -1,10 +1,10 @@
 import { db } from "./firebaseConfig.js";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 
 //Get DocumentID from the URL
 function getDocIDFromUrl() {
-  const params = new URL(window.location.href).searchParams;
-  return params.get("docID");
+  const url = new URL(window.location.href).searchParams;
+  return url.get("docID");
 }
 
 //Fetch friend and display its name and image
@@ -14,13 +14,14 @@ async function displayFriendInfo() {
   try {
     const friendRef = doc(db, "users", id);
     const friendSnap = await getDoc(friendRef);
-
     const friend = friendSnap.data();
+    
     const name = friend.name;
     const code = friend.code;
     const bio = friend.bio;
-    //implement friends list in a later sprint
+
     const friendIds = friend.friends || [];
+
     // //const img = document.getElementById("profilePicture");
     const numOfFriends = friendIds.length;
 

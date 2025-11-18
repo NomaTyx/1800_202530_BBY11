@@ -15,30 +15,30 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/socals-style.css" />
   </head>
   <!-- profilePicture, username, bio, friendsList, numOfFriends (friendsList.size) -->
   <body>
-    <!------------------------------>
-    <!-- HTML Layout goes here -->
-    <!------------------------------>
     <site-navbar></site-navbar>
 
     <div class="col">
       <div class="card">
-        <div class="row g-0">
-          <div class="col-md-4">
+        <div class="user-info row g-0">
+          <div class="d-flex justify-content-center User_profile col-md-4">
             <img
               id="profilePicture"
               src="/images/chess-placeholder.svg"
               alt="profilePicture"
+              class="rounded-circle bg-white"
             />
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 id="userName" class="card-title">user name here</h5>
-              <p id="bio" class="card-text bio">"Bio-text"</p>
+              <div class="bio-box card">
+                <p id="bio" class="card-text">"bio messege could go here"</p>
+              </div>
             </div>
-            <div class="settings-button"></div>
           </div>
         </div>
       </div>
@@ -50,25 +50,24 @@
     <!-- will have to get a friend component for each friend listing -->
     <div class="container">
       <div class="friend-buttons row">
-        <div class="col">
+        <div class="col-6">
           <img src="/images/chess-placeholder.svg" alt="friends-icon" />
           <p id="numOfFriends">Friends(21)</p>
         </div>
-
-        <div class="col">
-          <img src="/images/chess-placeholder.svg" alt="friends-icon" />
-          <p>Add Friends</p>
-        </div>
       </div>
-
+      <!--  Dont need this, don't need to display friends.
       <div class="container row">
         <friend-card></friend-card>
         <friend-card></friend-card>
         <friend-card></friend-card>
-      </div>
+      </div> -->
     </div>
 
     <!-- Link to scripts of your own -->
     <script type="module" src="/src/EachFriend.js"></script>
+    <script type="module" src="/src/firebaseConfig.js"></script>
+    <script type="module" src="/src/authentication.js"></script>
+    <script type="module" src="/src/main.js"></script>
+    <!-- <script type="module" src="./src/socals.js"></script> -->
   </body>
 </html>
