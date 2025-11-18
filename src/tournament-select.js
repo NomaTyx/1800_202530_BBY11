@@ -2,10 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "/styles/component-style.css";
 
-import { doc, collection, getDocs, setDoc } from "firebase/firestore";
+import { doc, collection, getDocs, setDoc, addDoc } from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
-
 let currUser;
 
 async function loadCards() {
@@ -20,25 +19,39 @@ async function loadCards() {
       let newTourneyTemplate = document.getElementById("newTourneyTemplate");
 
       //first card should always be the "new" button because it should be the easiest to see
-      cardContainer.appendChild(newTourneyTemplate.content.cloneNode(true));
+      let newTourneyClone = newTourneyTemplate.content.cloneNode(true);
+      newTourneyClone.querySelector(".makeNewTourneyButton").addEventListener("click", async () => {
+        const parentDocRef = doc(db, "users", uid);
+        const subcollectionRef = collection(parentDocRef, "tournamentData");
+        await setDoc(doc(subcollectionRef, document.querySelector("#tournamentNameInput").value), {
+          1: "placeholder!!! lowk you shouldnt be seeing this",
+        });
+        location.href = `data-entry.html?tournamentid=${
+          document.querySelector("#tournamentNameInput").value
+        }`;
+      });
+      cardContainer.appendChild(newTourneyClone);
 
       const querySnapshot = await getDocs(userTournamentsRef);
 
       querySnapshot.forEach((doc) => {
         let newcard = cardTemplate.content.cloneNode(true);
-        // Clone the template
         let numRounds = 0;
         let score = 0;
 
+        //read data and store the relevant bits
         for (let j = 1; j <= Object.keys(doc.data()).length; j++) {
           score += doc.data()[j]["result"];
           numRounds++;
         }
 
+        //populate cards with data
         newcard.querySelector(".tournamentName").textContent = doc.id;
         newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
         newcard.querySelector(".scoreText").textContent = "Score: " + score;
-
+        newcard.querySelector(".viewTournamentButton").addEventListener("click", async () => {
+          location.href = `data-entry.html?tournamentid=${doc.id}`;
+        });
         cardContainer.appendChild(newcard);
       });
     } else {

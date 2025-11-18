@@ -24,9 +24,12 @@
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
-    <div class="container align-items-center justify-content-center" id="cardholder">
+    <div
+      class="container align-items-center justify-content-center"
+      id="cardholder"
+    >
       <template id="cardTemplate">
-        <button class="card text-center w-100">
+        <button class="card text-center w-100 viewTournamentButton">
           <h5 class="tournamentName">tournament name will probably be long</h5>
           <span class="roundsText">Rounds: x</span>
           <span class="scoreText">Score: y/x</span>
@@ -34,17 +37,55 @@
         </button>
       </template>
       <template id="newTourneyTemplate">
-        <button class="card text-center w-100">
-          <div class="card-body">
-            <img
-              src="/images/plus.png"
-              alt="add new tourney"
-              class="card-img-top"
-              style="max-width: 100px"
-            />
-            <h5 class="card-title text-center">New Tournament</h5>
+        <div class="accordion" id="accordionExample">
+          <div
+            id="errorWithInput"
+            class="alert alert-danger d-none"
+            role="alert"
+          ></div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="card text-center w-100 newTourneyButton"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                <div class="card-body">
+                  <img
+                    src="/images/plus.png"
+                    alt="add new tourney"
+                    class="card-img-top"
+                    style="max-width: 100px"
+                  />
+                  <h5 class="card-title text-center">New Tournament</h5>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    id="tournamentNameInput"
+                    class="form-control"
+                    placeholder="Tournament name"
+                    required
+                  />
+                </div>
+                <button class="btn btn-primary w-100 makeNewTourneyButton">
+                  Make new tournament
+                </button>
+              </div>
+            </div>
           </div>
-        </button>
+        </div>
       </template>
     </div>
 

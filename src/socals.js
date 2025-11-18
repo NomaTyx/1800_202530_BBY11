@@ -1,52 +1,93 @@
-//import statements
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebaseConfig.js";
+import { collection, getDoc, doc } from "firebase/firestore";
+import { auth, db } from "./firebaseConfig.js";
+import { onAuthStateChanged } from "firebase/auth";
 
+//fetch placeholder elements and replace with info from the db
+async function displayUserInfo() {
+  onAuthStateChanged(auth, async (user) => {
+    try {
+      //define the constants.
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      const users = userSnap.data();
+      console.log(user.uid);
+
+      const userName = users?.name ?? "Unknown User";
+      const bio = users.bio;
+      const numFriends = users.friends.length;
+
+      //containers for elements we care about.
+      const userInfoContainer = document.getElementById("userNameplusBio");
+      const friendNumContainer = document.getElementById("friendNum");
+
+      // get selectors for placeHolders, and replace them.
+      const name = userInfoContainer.querySelector(".Username");
+      name.textContent = userName;
+      const biography = userInfoContainer.querySelector(".bioMsg");
+      biography.textContent = bio;
+
+      const friendNum = friendNumContainer.querySelector("p");
+      friendNum.textContent = `Friends (${numFriends})`;
+    } catch {
+      console.log("error poopy face");
+    }
+  });
+}
 async function displayCardsDynamically() {
-  const cardTemplate = document.getElementById("socialsCardTemplate");
-  const container = document.getElementById("friendsGoHere");
+  onAuthStateChanged(auth, async (user) => {
+    const cardTemplate = document.getElementById("socialsCardTemplate");
+    const container = document.getElementById("friendsGoHere");
 
-  //create databaste referance constant vs var in js
+    if (!container) {
+      console.error("friendsGoHere container not found");
+      return;
+    }
+    if (!cardTemplate) {
+      console.error("socialsCardTemplate container not found");
+      return;
+    }
 
-  if (!container) {
-    console.error("friendsGoHere container not found");
-    return;
-  }
-  if (!cardTemplate) {
-    console.error("socialsCardTemplate container not found");
-    return;
-  }
+    //try catch for created the dynamic cards
+    try {
+      //waits for snapshot of document at absolute path to be returned
+      const friendsList = await getDoc(doc(db, "users", user.uid));
 
-  //try catch for created the dynamic cars
-  try {
-    const friendsList = collection(db, "users");
-    const queryFriendsListSnapshot = await getDocs(friendsList);
+      //friendsList.data().friends gets the array at the property "friends" of the doc "friendsList"
 
-    queryFriendsListSnapshot.forEach((doc) => {
-      //clone of card template
-      const newcard = cardTemplate.content.cloneNode(true);
-      const userData = doc.data();
+      for (let i = 0; i < friendsList.data().friends.length; i++) {
+        //clone of card template
+        const newcard = cardTemplate.content.cloneNode(true);
 
-      newcard.querySelector(".card-image").src = `/images/${
-        userData.code || "chess-placeholder"
-      }.png`;
+        // newcard.querySelector(".card-image").src = `/images/${
+        //   userData.code || "chess-placeholder"
+        // }.png`;
 
-      const link = newcard.querySelector(".friendPage");
-      link.href = `/src/EachFriend.html?docID=${doc.id}`;
+        const link = newcard.querySelector(".friendPage a");
+        const friendId = friendsList.data().friends[i];
+        link.href = `/src/EachFriend.html?docID=${friendId}`;
 
-      const userName = newcard.querySelector(".userName");
-      userName.textContent = userData.name || "Unknown User";
+        const userName = newcard.querySelector(".userName");
+        let friendReference = await getDoc(
+          doc(db, "users", friendsList.data().friends[i])
+        );
+        //if the user with this user id has no name, "unknown user" is displayed instead.
+        let friendName = friendReference.data()?.name ?? "Unknown user";
+        // alert("friend name: " + friendName);
+        userName.textContent = friendName;
 
-      // // Fixed: Set the username text
-      // newcard.querySelector(".userName").textContent =
-      //   userData.name || userData.username || "Unknown User";
-      container.appendChild(newcard);
-    });
+        container.appendChild(newcard);
+      }
 
-    console.log(`Successfully loaded ${queryFriendsListSnapshot.size} friends`);
-  } catch (error) {
-    console.error("Error getting documents: ", error);
-  }
+      console.log(`Successfully loaded ${friendsList.data().length} friends`);
+    } catch (error) {
+      console.error("Error getting documents: ", error);
+    }
+  });
 }
 
-displayCardsDynamically();
+window.addEventListener("DOMContentLoaded", () => {
+  displayCardsDynamically();
+});
+window.addEventListener("DOMContentLoaded", () => {
+  displayUserInfo();
+});

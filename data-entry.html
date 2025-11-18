@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Edit Tournament</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+
+  <body>
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <!------------------------------>
+
+    <site-navbar></site-navbar>
+
+    <!-- Main content goes here -->
+
+    <div id="errorWithInput" class="alert alert-danger d-none" role="alert"></div>
+    <form id="roundInputForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary" novalidate>
+      <div class="mb-3">
+        <h2>New Round</h2>
+        <input
+          type="text"
+          id="opponentNameInput"
+          class="form-control"
+          placeholder="Opponent name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          id="opponentRatingInput"
+          class="form-control"
+          placeholder="Opponent rating"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <select id="colorInput" class="form-control">
+          <option value="white">White</option>
+          <option value="black">Black</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <select id="resultInput" class="form-control">
+          <option value="1">Won</option>
+          <option value="0">Lost</option>
+          <option value="0.5">Drew</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="date" id="dateInput" class="form-control" placeholder="date" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Add round</button>
+    </form>
+
+    <div id="roundholder">
+      <template id="roundTemplate">
+        <div class="accordion accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                id="roundnumber"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse1"
+                aria-expanded="true"
+                aria-controls="collapse1"
+              >
+                Add round
+              </button>
+            </h2>
+            <div
+              id="collapse1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <form
+                  id="existingRoundInputForm"
+                  class="p-4 p-md-5 border rounded-3 bg-body-tertiary"
+                  novalidate
+                >
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      id="existingOpponentNameInput"
+                      class="form-control"
+                      placeholder="Opponent name"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      id="existingOpponentRatingInput"
+                      class="form-control"
+                      placeholder="Opponent rating"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <select id="existingColorInput" class="form-control">
+                      <option value="white">White</option>
+                      <option value="black">Black</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <select id="existingResultInput" class="form-control">
+                      <option value="1">Won</option>
+                      <option value="0">Lost</option>
+                      <option value="0.5">Drew</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="date"
+                      id="existingDateInput"
+                      class="form-control"
+                      placeholder="date"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Edit round</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <site-footer></site-footer>
+
+    <!---------------------------------------------->
+    <!-- Your own JavaScript scripts go here      -->
+    <!---------------------------------------------->
+    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/data-entry.js"></script>
+  </body>
+</html>
