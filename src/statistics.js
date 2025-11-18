@@ -1,48 +1,96 @@
-import { db } from "./firebaseConfig.js";
-import { collection, getDocs, addDoc, serverTimestamp, onSnapshot } from "firebase/firestore";
+import { auth, db } from "./firebaseConfig.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, doc, getDocs } from "firebase/firestore";
 
-// This is just to get the stats reader to work :/
-function addTournamentData() {
-    const tournamentData = doc(db, "users");
-    addDoc(tournamentData, {
-        name: "BCC Championship", date: "2025/03/02", rounds: "5",
-        time_control: "90+30", record: "3.5-1.5", colour:"black",
-        note: "test", last_updated: serverTimestamp()
+let colorData;
+
+async function displayTournamentData(color) {
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            location.href = "login.html";
+        }
+
+        if (color == "white") {
+            colorData = await readResultForWhite();
+
+            // This is a temporary thing until the graph functions
+            document.getElementsByClassName("text-center").innerHTML = colorData;
+            // renderGraph(colorData);
+        } else if (color == "black") {
+            colorData = await readResultForBlack();
+
+            // This is a temporary thing until the graph functions
+            document.getElementsByClassName("text-center").innerHTML = colorData;
+            // renderGraph(colorData);
+        }
     });
-    addDoc(tournamentData, {
-        name: "Treasure Island RYC", date: "2025/06/22", rounds: "5", 
-        time_control: "90+30", record: "3.5-1.5", colour:"white", 
-        note: ":)", last_updated: serverTimestamp()
+}
+
+document.getElementById("getDataForWhite").addEventListener("click", displayTournamentData("white"));
+document.getElementById("getDataForBlack").addEventListener("click", displayTournamentData("black"));
+
+let resultData;
+
+async function readResultForWhite() {
+    const userData = user.uid;
+    const userTournamentDataRef = collection(db, "users", userData, "tournamentData")
+        .where("color", "==", "white");
+    const querySnapshot = await getDocs(userTournamentDataRef);
+
+    let colorCount = 0;
+    let winCount = 0;
+    let lossCount = 0;
+
+    querySnapshot.forEach((doc) => {
+        colorCount++;
+        resultData = doc.data().result;
+
+        if (resultData == 1) {
+            winCount++;
+        } else {
+            lossCount++;
+        }
     });
-    addDoc(tournamentData, {
-        name: "Richard Showman Memorial", date: "2025/01/09", rounds: "5", 
-        time_control: "90+30", record: "2-3", colour:"black", 
-        note: "...", last_updated: serverTimestamp()
+
+    let winRate = (winCount + lossCount) / 2;
+
+    return "Your winrate for white is " + winRate + " in " + colorCount + " games.";
+}
+
+async function readResultForBlack() {
+    const userData = user.uid;
+    const userTournamentDataRef = collection(db, "users", userData, "tournamentData")
+        .where("color", "==", "black");
+    const querySnapshot = await getDocs(userTournamentDataRef);
+
+    let colorCount = 0;
+    let winCount = 0;
+    let lossCount = 0;
+
+    querySnapshot.forEach((doc) => {
+        colorCount++;
+        resultData = doc.data().result;
+
+        if (resultData == 1) {
+            winCount++;
+        } else {
+            lossCount++;
+        }
+    });
+
+    let winRate = (winCount + lossCount) / 2;
+
+    return "Your winrate for black is " + winRate + " in " + colorCount + " games.";
+}
+
+function renderGraph(colorData) {
+    // Render graph code here
+    const winRate = document.getElementsById("chart");
+    const winRateGraph = new Chart(winRate, {
+        // The graph ig
+        type: "line",
+        data: {
+            // The pain ig.
+        }
     });
 }
-
-async function seedtournamentData() {
-    const tournamentData = collection(db, "users");
-    const querySnapshot = await getDocs(tournamentData);
-
-    if (querySnapshot.empty) {
-        console.log("dataTournament collection is empty. Seeding data...");
-        addTournamentData();
-    } else {
-        console.log("dataTournament collection already contains data. Skipping seed.");
-    }
-}
- 
-seedtournamentData();
-
-function getTournamentData(data) {
-    const userRef = doc(db, "users", userID);
-    const tournamentData = doc();
-}
-
-// This is to get the actual(?) read function to work
-async function displayTournamentData() {
-    // Code goes here :/
-}
-
-displayTournamentData();

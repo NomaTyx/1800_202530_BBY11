@@ -27,14 +27,13 @@
     <div class="container text-center"> 
       <!-- Not sure how the graph will function, but for now I used reactive image. -->
       <div class="text-center">
-        <h1>Win Rate</h1>
-        <img src="..." class="img-fluid" alt="Placeholder for Graph">
+        <canvas id="chart"></canvas>
       </div>
 
       <div class="filter-buttons">
         <h1>Colour Played</h1>
-        <button type="button" class="btn btn-warning btn-lg">White</button>
-        <button type="button" class="btn btn-warning btn-lg">Black</button>
+        <button type="button" class="btn btn-warning btn-lg" id="getDataForWhite">White</button>
+        <button type="button" class="btn btn-warning btn-lg" id="getDataForBlack">Black</button>
       </div>
 
       <!-- I'm not sure if this will be the final way to get the date, but this will have to do. -->
