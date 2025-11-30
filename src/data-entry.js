@@ -1,4 +1,13 @@
-import { doc, getDoc, collection, getDocs, setDoc, addDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  setDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -25,7 +34,8 @@ roundInputForm?.addEventListener("submit", async (e) => {
 
       await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
         //set the round number with all the data
-        [i + 1]: {
+        //there is a dummy element named 'exists' that takes up the 0th slot.
+        [i]: {
           "color": color,
           "opponentName": oppName,
           "result": result,
@@ -48,7 +58,7 @@ async function loadCards() {
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
 
       //the tournament docs consist of maps (one map per round), so we loop through each one
-      for (let i = 1; i <= Object.keys(tournamentDoc.data()).length; i++) {
+      for (let i = 1; i <= Object.keys(tournamentDoc.data()).length - 1; i++) {
         let roundClone = roundTemplate.content.cloneNode(true);
         //populate cards with data (each round has its own data
         roundClone.querySelector("#roundnumber").textContent = `Round ${i}`;
@@ -100,6 +110,14 @@ async function loadCards() {
           });
         document.getElementById("roundholder").appendChild(roundClone);
       }
+      document.getElementById("deleteTournamentButton").addEventListener("click", async () => {
+        const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
+
+        //grab the specified tournament doc
+        let tournamentDoc = doc(userTournamentsRef, params.get("tournamentid"));
+        await deleteDoc(tournamentDoc);
+        location.href = "tournament-select.html";
+      });
     } else {
       location.href = "login.html";
     }

@@ -24,7 +24,7 @@ async function loadCards() {
         const parentDocRef = doc(db, "users", uid);
         const subcollectionRef = collection(parentDocRef, "tournamentData");
         await setDoc(doc(subcollectionRef, document.querySelector("#tournamentNameInput").value), {
-          1: "placeholder!!! lowk you shouldnt be seeing this",
+          exists: "placeholder!!! lowk you shouldnt be seeing this",
         });
         location.href = `data-entry.html?tournamentid=${
           document.querySelector("#tournamentNameInput").value
@@ -39,10 +39,12 @@ async function loadCards() {
         let numRounds = 0;
         let score = 0;
 
-        //read data and store the relevant bits
-        for (let j = 1; j <= Object.keys(doc.data()).length; j++) {
-          score += doc.data()[j]["result"];
-          numRounds++;
+        if (Object.keys(doc.data()).length > 0) {
+          //read data and store the relevant bits
+          for (let j = 1; j <= Object.keys(doc.data()).length - 1; j++) {
+            score += Number(doc.data()[j]["result"]);
+            numRounds++;
+          }
         }
 
         //populate cards with data
