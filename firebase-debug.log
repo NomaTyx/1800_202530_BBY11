@@ -1,0 +1,21 @@
+[debug] [2025-11-26T05:00:04.947Z] ----------------------------------------------------------------------
+[debug] [2025-11-26T05:00:04.951Z] Command:       /usr/local/bin/firebase /Users/nomatyx/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase init
+[debug] [2025-11-26T05:00:04.951Z] CLI Version:   14.2.2
+[debug] [2025-11-26T05:00:04.952Z] Platform:      darwin
+[debug] [2025-11-26T05:00:04.952Z] Node Version:  v20.18.2
+[debug] [2025-11-26T05:00:04.952Z] Time:          Tue Nov 25 2025 21:00:04 GMT-0800 (Pacific Standard Time)
+[debug] [2025-11-26T05:00:04.952Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-26T05:00:04.958Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-26T05:00:04.959Z] > authorizing via signed-in user (jjziebart99@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/nomatyx/BCITRepos/comp1800/1800_202530_BBY11
+

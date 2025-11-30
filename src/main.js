@@ -76,4 +76,8 @@ seedFriends();
 // document.addEventListener('DOMContentLoaded', sayHello);
 
 // --- Initialize UI on DOMContentLoaded ---
-document.addEventListener("DOMContentLoaded", test);
+document.addEventListener("DOMContentLoaded", () => {
+  if (!location.href.includes(".html")) {
+    window.location.href = "tournament-select.html";
+  }
+});
