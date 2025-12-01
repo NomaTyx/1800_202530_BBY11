@@ -23,10 +23,6 @@ async function displayCardsDynamically() {
       const newcard = cardTemplate.content.cloneNode(true);
       const userData = doc.data();
 
-      newcard.querySelector(".card-image").src = `/images/${
-        userData.code || "chess-placeholder"
-      }.png`;
-
       const link = newcard.querySelector(".friendPage");
       link.href = `/src/EachFriend.html?docID=${doc.id}`;
 
@@ -35,9 +31,10 @@ async function displayCardsDynamically() {
 
       container.appendChild(newcard);
     });
-    console.log(`Successfully loaded ${queryUserListSnapshot.size} friends`);
+    console.log(`Successfully loaded ${queryUserListSnapshot.size} users`);
 
-    const numOfUsersFriends = friendIds.length;
+    //this is broke. TODO: Fix.
+    //const numOfUsersFriends = friends?.length ?? 0;
     document.getElementById("numOfUsersFriends").textContent =
       "Friends (" + numOfUsersFriends + ")";
   } catch (error) {

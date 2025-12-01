@@ -7,6 +7,7 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
@@ -32,16 +33,14 @@ roundInputForm?.addEventListener("submit", async (e) => {
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
       let i = Object.keys(tournamentDoc.data()).length;
 
-      await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
-        //set the round number with all the data
-        //there is a dummy element named 'exists' that takes up the 0th slot.
-        [i]: {
+      await setDoc(doc(userTournamentsRef, params.get("tournamentid")), {
+        tournamentArray: arrayUnion({
           "color": color,
           "opponentName": oppName,
           "result": result,
           "date": date,
           "opponentRating": rating,
-        },
+        }),
       });
       location.reload();
     }
@@ -58,7 +57,7 @@ async function loadCards() {
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
 
       //the tournament docs consist of maps (one map per round), so we loop through each one
-      for (let i = 1; i <= Object.keys(tournamentDoc.data()).length - 1; i++) {
+      for (let i = 1; i <= tournamentDoc.data().length - 1; i++) {
         let roundClone = roundTemplate.content.cloneNode(true);
         //populate cards with data (each round has its own data
         roundClone.querySelector("#roundnumber").textContent = `Round ${i}`;
@@ -98,13 +97,13 @@ async function loadCards() {
 
             await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
               //set the round number
-              [i]: {
+              tournamentArray: arrayUnion({
                 "color": color,
                 "opponentName": oppName,
                 "result": result,
                 "date": date,
                 "opponentRating": rating,
-              },
+              }),
             });
             location.reload();
           });
