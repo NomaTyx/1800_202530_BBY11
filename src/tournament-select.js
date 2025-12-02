@@ -23,9 +23,6 @@ async function loadCards() {
       newTourneyClone.querySelector(".makeNewTourneyButton").addEventListener("click", async () => {
         const parentDocRef = doc(db, "users", uid);
         const subcollectionRef = collection(parentDocRef, "tournamentData");
-        await setDoc(doc(subcollectionRef, document.querySelector("#tournamentNameInput").value), {
-          1: "placeholder!!! lowk you shouldnt be seeing this",
-        });
         location.href = `data-entry.html?tournamentid=${
           document.querySelector("#tournamentNameInput").value
         }`;
@@ -39,10 +36,12 @@ async function loadCards() {
         let numRounds = 0;
         let score = 0;
 
-        //read data and store the relevant bits
-        for (let j = 1; j <= Object.keys(doc.data()).length; j++) {
-          score += doc.data()[j]["result"];
-          numRounds++;
+        if (doc.data().tournamentArray.length > 0) {
+          //read data and store the relevant bits
+          for (let j = 0; j <= doc.data().tournamentArray.length - 1; j++) {
+            score += Number(doc.data().tournamentArray[j]["result"]);
+            numRounds++;
+          }
         }
 
         //populate cards with data
@@ -79,64 +78,70 @@ function addTourneyData() {
   const tourneysRef = collection(db, "users", currUser.uid, "tournamentData");
   console.log("Adding sample tournament data...");
   setDoc(doc(tourneysRef, "daniel naroditsky memorial"), {
-    1: {
-      color: "white",
-      opponentName: "bruce",
-      opponentRating: "2800",
-      result: 0,
-    },
-    2: {
-      color: "white",
-      opponentName: "umanga",
-      opponentRating: "200",
-      result: 1,
-    },
-    3: {
-      color: "black",
-      opponentName: "grace",
-      opponentRating: "1500",
-      result: 0,
-    },
+    tournamentArray: [
+      {
+        color: "white",
+        opponentName: "bruce",
+        opponentRating: "2800",
+        result: 0,
+      },
+      {
+        color: "white",
+        opponentName: "umanga",
+        opponentRating: "200",
+        result: 1,
+      },
+      {
+        color: "black",
+        opponentName: "grace",
+        opponentRating: "1500",
+        result: 0,
+      },
+    ],
   });
   setDoc(doc(tourneysRef, "daniel naroditsky memorial 2"), {
-    1: {
-      color: "white",
-      opponentName: "bruce2",
-      opponentRating: "2800",
-      result: 0,
-    },
-    2: {
-      color: "white",
-      opponentName: "umanga2",
-      opponentRating: "200",
-      result: 1,
-    },
-    3: {
-      color: "black",
-      opponentName: "grace2",
-      opponentRating: "1500",
-      result: 0,
-    },
+    tournamentArray: [
+      {
+        color: "white",
+        opponentName: "bruce2",
+        opponentRating: "2800",
+        result: 0,
+      },
+      {
+        color: "white",
+        opponentName: "umanga2",
+        opponentRating: "200",
+        result: 1,
+      },
+      {
+        color: "black",
+        opponentName: "grace2",
+        opponentRating: "1500",
+        result: 0,
+      },
+    ],
   });
   setDoc(doc(tourneysRef, "daniel naroditsky memorial 3"), {
-    1: {
-      color: "white",
-      opponentName: "bruce3",
-      opponentRating: "2800",
-      result: 0,
-    },
-    2: {
-      color: "white",
-      opponentName: "umanga3",
-      opponentRating: "200",
-      result: 1,
-    },
-    3: {
-      color: "black",
-      opponentName: "grace3",
-      opponentRating: "1500",
-      result: 0,
-    },
+    tournamentArray: [
+      {
+        color: "white",
+        opponentName: "bruce3",
+        opponentRating: "2800",
+        result: 0,
+      },
+      {
+        color: "white",
+        opponentName: "umanga3",
+        opponentRating: "200",
+        result: 1,
+      },
+      {
+        color: "black",
+        opponentName: "grace3",
+        opponentRating: "1500",
+        result: 0,
+      },
+    ],
   });
 }
 

@@ -50,17 +50,6 @@ class SiteNavbar extends HTMLElement {
               <a class="nav-link" href="social.html">Socials</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
           <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
             <!-- populated by JS -->
           </div>
