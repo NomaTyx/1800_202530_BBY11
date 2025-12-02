@@ -26,9 +26,7 @@
   padding-bottom: 1%;
 }
 
-.col, .settings-button, .text-end {
-  /*make it a bit bigger, 
-   make it at the bottom rihgt as well  */
+.col {
   display: flex;
   float: right;
   align-items: center;
@@ -38,42 +36,78 @@
   display: block;
 }
 
-#add_friend {
-  text-decoration: none;
-  font-size: larger;
-}
-
 .user-info {
   background: #af8a68;
 }
 
-.container > .btn, .btn-warning {
-  width: 50%;
-  border-color: #AF8A68;
-  background-color: #AF8A68;
-
-  a {
-    color: #3B2F23;
-  }
-}
-
-.container > .btn, .btn-warning:hover {
+#editProfile, #addFriendButton {
   border-color: #3B2F23;
   background-color: #3B2F23;
-  a {
-    color: #AF8A68;
+  color: #AF8A68 !important;
+  height: 70%;
+  width: 95%;
+  font-size: larger;
+
+  img {
+    margin-right: 5%;
   }
 }
 
-.container > .btn, .btn-warning:active {
-  border-color: #FDFBF8 !important;
-  background-color: #FDFBF8 !important; 
-  a {
-    color: #3B2F23 !important;
-  }
+#editProfile:hover, #addFriendButton:hover {
+  border-color: #AF8A68;
+  background-color: #AF8A68;
+  color: #3B2F23 !important;
+}
+
+#editProfile:active, .btn:active, #addFriendButton:active {
+  border-color: #ECDAB9 !important;
+  background-color: #ECDAB9 !important; 
+  color: #3B2F23 !important;
+}
+
+/* For the edit profile popup */
+.close {
+  font-size: larger;
+  margin-top: 0.5%;
+  margin-left: 1%;
+}
+
+label {
+  margin-top: 0.5%;
+}
+
+#bio {
+  margin-bottom: 1%;
+}
+
+label, #bio, #name {
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+h2 {
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+#submitBtn {
+  margin-right: 1.5%;
+  color: #3B2F23;
+  border-color: #AF8A68;
+  background-color: #AF8A68;
+}
+
+#submitBtn:hover {
+  color: #AF8A68;
+  border-color: #3B2F23;
+  background-color: #3B2F23;
 }
 
 /* For add-friend.html */
+
+.numOfUsersFriends {
+  margin-bottom: 1%;
+}
 
 form {
   margin-bottom: 2%;
@@ -85,6 +119,9 @@ form {
   }
 }
 
-/* .add_friends_button {
-  
-} */
+#addFriendButton {
+  border-color: #3B2F23;
+  background-color: #3B2F23;
+  color: #AF8A68;
+  font-size: larger;
+}
