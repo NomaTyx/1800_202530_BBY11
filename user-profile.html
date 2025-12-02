@@ -37,7 +37,17 @@
     </div>
 
     <!-- this is where the list of tournaments goes-->
-    <div class="tournamentContainer"></div>
+    <div id="tournamentholder">
+      <h1 class="text-center">This user's tournaments</h1>
+      <template id="cardTemplate">
+        <div class="card text-center w-100 viewTournamentButton">
+          <h5 class="tournamentName">tournament name will probably be long</h5>
+          <span class="roundsText">Rounds: x</span>
+          <span class="scoreText">Score: y/x</span>
+          <span class="dateText">m/d/y - m/d/y</span>
+        </div>
+      </template>
+    </div>
 
     <!-- Link to scripts of your own -->
     <script type="module" src="/src/user-profile.js"></script>
