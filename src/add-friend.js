@@ -27,7 +27,7 @@ async function displayCardsDynamically() {
         userName.textContent = userData.name || "Unknown User";
 
         newcard.querySelector(".friendPage").addEventListener("click", async () => {
-          location.href = `data-entry.html?userid=${doc.id}`;
+          location.href = `user-profile.html?userid=${doc.id}`;
         });
 
         container.appendChild(newcard);
