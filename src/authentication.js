@@ -63,9 +63,10 @@ export async function signupUser(name, email, password) {
       email: email,
       country: "Canada", // Default value
       school: "BCIT", // Default value
+      bio: "You haven't set a bio!",
     });
   } catch (error) {
-    alert("THERE WAS AN ERROR");
+    alert("THERE WAS AN ERROR WITH SIGNUP");
     console.error("Error creating user document in Firestore:", error);
   }
 

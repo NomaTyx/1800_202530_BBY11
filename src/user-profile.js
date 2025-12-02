@@ -15,7 +15,7 @@ async function displayFriendInfo() {
     const friendRef = doc(db, "users", id);
     const friendSnap = await getDoc(friendRef);
     const friend = friendSnap.data();
-    
+
     const name = friend.name;
     const code = friend.code;
     const bio = friend.bio;
@@ -39,8 +39,7 @@ async function displayFriendInfo() {
     //add the specified user's friends list later sprint
 
     //change the users number of friends programatically
-    document.getElementById("numOfFriends").textContent =
-      "Friends (" + numOfFriends + ")";
+    document.getElementById("numOfFriends").textContent = "Friends (" + numOfFriends + ")";
 
     //await displayFriendsList(friendIds);
   } catch (error) {

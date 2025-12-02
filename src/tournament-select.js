@@ -23,9 +23,6 @@ async function loadCards() {
       newTourneyClone.querySelector(".makeNewTourneyButton").addEventListener("click", async () => {
         const parentDocRef = doc(db, "users", uid);
         const subcollectionRef = collection(parentDocRef, "tournamentData");
-        await setDoc(doc(subcollectionRef, document.querySelector("#tournamentNameInput").value), [
-          "placeholder!!! lowk you shouldnt be seeing this",
-        ]);
         location.href = `data-entry.html?tournamentid=${
           document.querySelector("#tournamentNameInput").value
         }`;
@@ -41,8 +38,8 @@ async function loadCards() {
 
         if (doc.data().tournamentArray.length > 0) {
           //read data and store the relevant bits
-          for (let j = 1; j <= doc.data().length - 1; j++) {
-            score += Number(doc.data()[j]["result"]);
+          for (let j = 0; j <= doc.data().tournamentArray.length - 1; j++) {
+            score += Number(doc.data().tournamentArray[j]["result"]);
             numRounds++;
           }
         }

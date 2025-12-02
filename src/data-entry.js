@@ -8,6 +8,7 @@ import {
   updateDoc,
   deleteDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
@@ -31,9 +32,9 @@ roundInputForm?.addEventListener("submit", async (e) => {
 
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
-      let i = Object.keys(tournamentDoc.data()).length;
 
       await setDoc(doc(userTournamentsRef, params.get("tournamentid")), {
+        //arrayunion says "take whatever was already there and append this to it"
         tournamentArray: arrayUnion({
           "color": color,
           "opponentName": oppName,
@@ -42,7 +43,6 @@ roundInputForm?.addEventListener("submit", async (e) => {
           "opponentRating": rating,
         }),
       });
-      location.reload();
     }
   });
 });
@@ -56,26 +56,27 @@ async function loadCards() {
       //grab the specified tournament doc
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
 
+      alert(tournamentDoc.data().tournamentArray.length);
       //the tournament docs consist of maps (one map per round), so we loop through each one
-      for (let i = 1; i <= tournamentDoc.data().length - 1; i++) {
+      for (let i = 0; i <= tournamentDoc.data().tournamentArray.length - 1; i++) {
         let roundClone = roundTemplate.content.cloneNode(true);
         //populate cards with data (each round has its own data
-        roundClone.querySelector("#roundnumber").textContent = `Round ${i}`;
+        roundClone.querySelector("#roundnumber").textContent = `Round ${i + 1}`;
 
         roundClone.querySelector("#existingOpponentNameInput").value =
-          tournamentDoc.data()[i]["opponentName"] ?? "";
+          tournamentDoc.data().tournamentArray[i]["opponentName"] ?? "";
 
         roundClone.querySelector("#existingOpponentRatingInput").value =
-          tournamentDoc.data()[i]["opponentRating"] ?? "";
+          tournamentDoc.data().tournamentArray[i]["opponentRating"] ?? "";
 
         roundClone.querySelector("#existingColorInput").value =
-          tournamentDoc.data()[i]["color"] ?? "";
+          tournamentDoc.data().tournamentArray[i]["color"] ?? "";
 
         roundClone.querySelector("#existingResultInput").value =
-          tournamentDoc.data()[i]["result"] ?? "";
+          tournamentDoc.data().tournamentArray[i]["result"] ?? "";
 
         roundClone.querySelector("#existingDateInput").value =
-          tournamentDoc.data()[i]["date"] ?? "";
+          tournamentDoc.data().tournamentArray[i]["date"] ?? "";
 
         //here is where we set the IDs so that the accordion buttons can communicate with each other
         roundClone.querySelector("#roundnumber").dataset.bsTarget = `#collapse${i}`;
@@ -107,6 +108,20 @@ async function loadCards() {
             });
             location.reload();
           });
+        roundClone.querySelector("#deleteRoundButton").addEventListener("click", async () => {
+          alert(tournamentDoc.data().tournamentArray[i]["opponentName"]);
+          //there may be a better way to do this but i'm scared
+          //arrayRemove says "return the exact same array except remove the first instance of whatever was passed in"
+          await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
+            tournamentArray: arrayRemove({
+              "color": tournamentDoc.data().tournamentArray[i]["color"],
+              "opponentName": tournamentDoc.data().tournamentArray[i]["opponentName"],
+              "opponentRating": tournamentDoc.data().tournamentArray[i]["opponentRating"],
+              "result": tournamentDoc.data().tournamentArray[i]["result"],
+            }),
+          });
+          location.reload();
+        });
         document.getElementById("roundholder").appendChild(roundClone);
       }
       document.getElementById("deleteTournamentButton").addEventListener("click", async () => {
@@ -121,11 +136,6 @@ async function loadCards() {
       location.href = "login.html";
     }
   });
-}
-
-//TODO: make page reload after thing is entered
-function setVisible(el, visible) {
-  el.classList.toggle("d-none", !visible);
 }
 
 // Show error message with accessibility and auto-hide
