@@ -26,8 +26,15 @@
     <!-- Add data entry stuff here :) -->
     <div class="container text-center"> 
       <!-- Not sure how the graph will function, but for now I used reactive image. -->
-      <div class="text-center">
-        <canvas id="chart"></canvas>
+      <div class="stats-chart">
+        <template class="winrate-chart">
+          <dl>
+            <dt>Winrate</dt>
+            <dd><span class="text">Win</span></dd>
+            <dd><span class="text">Lost</span></dd>
+            <dd><span class="text">Win Rate</span></dd>
+          </dl>
+        </template>
       </div>
 
       <div class="filter-buttons">
@@ -48,6 +55,8 @@
           <label for="floatingInput" id="endDate">End Date</label>
         </div>
       </div>
+
+      <button type="button" class="btn btn-warning btn-lg">Clear</button>
     </div>
 
     <!-- our own footer goes here -->

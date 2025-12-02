@@ -26,10 +26,12 @@
   padding-bottom: 1%;
 }
 
-.settings_button {
+.col, .settings-button, .text-end {
   /*make it a bit bigger, 
    make it at the bottom rihgt as well  */
   display: flex;
+  float: right;
+  align-items: center;
 }
 
 .bio_box {
@@ -43,6 +45,63 @@
 
 .user-info {
   background: #af8a68;
+}
+
+.container > .btn, .btn-warning {
+  width: 50%;
+  border-color: #AF8A68;
+  background-color: #AF8A68;
+
+  div > a {
+    color: #3B2F23;
+  }
+}
+
+.container > .btn, .btn-warning:hover {
+  border-color: #3B2F23;
+  background-color: #3B2F23;
+  div > a {
+    color: #AF8A68;
+  }
+}
+
+.container > .btn, .btn-warning:active {
+  border-color: #FDFBF8 !important;
+  background-color: #FDFBF8 !important; 
+  div > a {
+    color: #3B2F23 !important;
+  }
+}
+
+/* For add-friend.html */
+
+form {
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-bottom: 2%;
+
+  .btn {
+    color: #AF8A68;
+    border-color: #3B2F23;
+    background-color: #3B2F23;
+  }
+
+  .btn:hover {
+    color: #3B2F23;
+    border-color: #AF8A68;
+    background-color: #AF8A68;
+  }
+
+  .btn:active {
+    color: #3B2F23 !important;
+    border-color: #FDFBF8 !important;
+    background-color: #FDFBF8 !important;
+  }
+}
+
+#friendsFriendslist {
+  margin-right: 5%;
+  margin-left: 5%;
 }
 
 /* .add_friends_button {

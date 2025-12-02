@@ -10,25 +10,15 @@ site-navbar > .navbar, .navbar-expand-lg, .bg-warning > .container-fluid {
     }
 
     button {
-        color: #3B2F23;
-        border-color: #3B2F23;
-    }
-
-    button:hover {
-        color: #3B2F23;
+        color: #AF8A68;
         border-color: #3B2F23;
         background-color: #3B2F23;
     }
 
-    #authControls a {
-        color: #ECDAB9;
+    button:hover {
+        color: #3B2F23;
         border-color: #ECDAB9;
-    }
-
-    #authControls a:hover {
-        color: #3B2F23;;
-        border-color: #AF8A68;
-        background-color: #AF8A68;
+        background-color: #ECDAB9;
     }
 }
 

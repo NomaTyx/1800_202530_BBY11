@@ -23,9 +23,9 @@
         }
 
         button:active {
-            color: #3B2F23;
-            border-color: #FDFBF8;
-            background-color: #FDFBF8;
+            color: #3B2F23 !important;
+            border-color: #FDFBF8 !important;
+            background-color: #FDFBF8 !important;
         }
     }
 }

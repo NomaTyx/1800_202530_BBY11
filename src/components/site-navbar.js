@@ -22,19 +22,21 @@ class SiteNavbar extends HTMLElement {
       <div class="container-fluid">
         <a class="navbar-brand" href="login.html">
           <img src="./images/chess-placeholder.svg" height="36" />
-          UTT
+          UCT
         </a>
+        <!-- The hamburger menu thing-->
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Actual Nav items -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -64,7 +66,7 @@ class SiteNavbar extends HTMLElement {
     onAuthStateChanged(auth, (user) => {
       let updatedAuthControl;
       if (user) {
-        updatedAuthControl = `<button class="btn btn-outline-light" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
+        updatedAuthControl = `<button class="btn btn-light" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
         authControls.innerHTML = updatedAuthControl;
         const signOutBtn = authControls.querySelector("#signOutBtn");
         signOutBtn?.addEventListener("click", logoutUser);
