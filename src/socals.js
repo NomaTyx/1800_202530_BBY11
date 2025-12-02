@@ -47,12 +47,16 @@ async function displayCardsDynamically() {
 
         userName.textContent = friendName;
 
+        newcard.getElementById("friendProfileButton").addEventListener("click", () => {
+          location.href = `/user-profile.html?userid=${friendId}`;
+        });
+
         container.appendChild(newcard);
         console.log(`Successfully loaded ${userDoc.data().length} friends`);
       }
     } else {
       let t = document.createElement("h1");
-      t.textContent = "You have no friends hahahahaha";
+      t.textContent = "Unfortunately, you have no friends.";
       container.appendChild;
     }
   });
