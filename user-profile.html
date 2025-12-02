@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Socials</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <script type="module" src="/src/components/friendCard.js"></script>
+
+    <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/socals-style.css" />
+  </head>
+  <!-- profilePicture, username, bio, friendsList, numOfFriends (friendsList.size) -->
+  <body>
+    <site-navbar></site-navbar>
+
+    <div class="card">
+      <div class="user-info row g-0">
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title Username" id="usernameDisplay">Username here</h5>
+            <div class="bio-box card">
+              <p id="bioText" class="card-text">"bio message could go here"</p>
+            </div>
+          </div>
+        </div>
+        <!-- TODO: center this please!!-->
+        <button id="addFriendButton" class="col">Add friend</button>
+      </div>
+    </div>
+
+    <!-- this is where the list of tournaments goes-->
+    <div id="tournamentholder">
+      <h1 class="text-center">This user's tournaments</h1>
+      <template id="cardTemplate">
+        <div class="card text-center w-100 viewTournamentButton">
+          <h5 class="tournamentName">tournament name will probably be long</h5>
+          <span class="roundsText">Rounds: x</span>
+          <span class="scoreText">Score: y/x</span>
+          <span class="dateText">m/d/y - m/d/y</span>
+        </div>
+      </template>
+    </div>
+
+    <!-- Link to scripts of your own -->
+    <script type="module" src="/src/user-profile.js"></script>
+    <script type="module" src="/src/firebaseConfig.js"></script>
+    <script type="module" src="/src/authentication.js"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

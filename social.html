@@ -20,51 +20,50 @@
 
   <body>
     <site-navbar></site-navbar>
-
-    <!-- Add data entry stuff here :) -->
-    <div class="col" id="userNameplusBio">
-      <div class="card">
-        <div class="user-info row g-0">
-          <div class="d-flex justify-content-center User_profile col-md-4">
-            <img
-              src="/images/chess-placeholder.svg"
-              alt="profile_picture"
-              class="rounded-circle bg-white"
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title Username">Username here</h5>
-              <div class="bio-box card">
-                <p class="bioMsg card-text">"bio messege could go here"</p>
+    <!-- bar that displays your username and bio and settings-->
+    <div class="card">
+      <div class="user-info row g-0">
+        <div class="col-md-8">
+          <div class="card-body">
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Enter Information</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Edit name:" />
+                <label for="bio">Bio:</label>
+                <input type="text" id="bio" placeholder="Edit bio:" />
+                <button id="submitBtn">Submit</button>
               </div>
             </div>
-            <div class="settings-button text-end">
-              <a href="friend-settings.html"
-                ><img src="/images/settingsCog.svg" alt="settings_cog"
-              /></a>
+            <h5 class="card-title Username" id="usernameDisplay">Username here</h5>
+            <div id="biobox" class="bio-box card">
+              <p id="bioText" class="card-text">"bio message could go here"</p>
+              <button id="editProfile">Edit profile</button>
             </div>
           </div>
+        </div>
+        <!-- TODO: center this please!!-->
+        <div class="col settings-button text-end">
+          <a href="friend-settings.html">
+            <img src="/images/settingsCog.svg" alt="settings_cog" />
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- get a tornament componet -->
-    <div class="tornament"></div>
+    <!-- get a tornament component -->
+    <div class="tournamentContainer"></div>
 
     <div class="container">
       <div class="friend-buttons row">
         <div id="friendNum" class="col-6">
           <img src="/images/chess-placeholder.svg" alt="friends-icon" />
-          <span class="hey"><p>Friends(21)</p></span>
+          <p id="numFriendsText">Friends(__)</p>
         </div>
 
         <!-- change button maybe to a anchor styled like a button, maybe better styling. -->
-        <button
-          type="button"
-          onclick="location.href='add-friend.html'"
-          class="col-6 bg-white"
-        >
+        <button type="button" onclick="location.href='add-friend.html'" class="col-6 bg-white">
           <div class="col-6 bg-white">
             <img src="/images/chess-placeholder.svg" alt="friends-icon" />
             <a href="add-friend.html" id="add_friend">Add Friends</a>
@@ -74,25 +73,26 @@
     </div>
 
     <div class="container">
+      <h1>Your friends:</h1>
       <div id="friendsGoHere"></div>
     </div>
 
+    <!-- template for cards-->
     <template id="socialsCardTemplate">
-      <div class="row friend-card p-3 border mb-3">
+      <div class="row p-3 border mb-3">
         <img
           class="card-image col-2 img-fluid"
           src="public\images\chess-placeholder.svg"
           alt="profile"
         />
-        <div
+        <button
+          id="friendProfileButton"
           class="friendPage col-8 d-flex justify-content-center align-items-center"
         >
-          <a href="#">
-            <span class="userName">Name</span>
-          </a>
-        </div>
-      </div>
-    </template>
+          <h2 class="userName">Name</h2>
+        </button>
+      </div></template
+    >
 
     <!---------------------------------------------->
     <!-- JavaScript functions go here    -->

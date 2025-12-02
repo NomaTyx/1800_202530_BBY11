@@ -11,67 +11,35 @@
     <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+
+    <link rel="stylesheet" href="./styles/style.css" />
   </head>
 
   <body>
     <site-navbar></site-navbar>
     <!-- Add data entry stuff here :) -->
-    <div class="col">
-      <div class="card">
-        <div class="row g-0">
-          <div class="d-flex justify-content-center User_profile col-md-4">
-            <img src="/images/chess-placeholder.svg" alt="profile_picture" />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title Username" id="socialsUserName">
-                username here
-              </h5>
-              <p id="Bio" class="card-text">"bio messege could go here"</p>
-            </div>
-            <div class="settings-button"></div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="container">
       <div class="friend-buttons row">
         <div class="numOfUsersFriends col-6">
-          <img src="/images/chess-placeholder.svg" alt="friends-icon" />
-          <p>Friends(21)</p>
+          <h1>Other users:</h1>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div id="friendsFriendslist" class="card">
-        <template id="FriendsOfFriend">
-          <div class="row friend-card col-6">
-            <img
-              class="card-image col-4 img-fluid"
-              src="public\images\chess-placeholder.svg"
-              alt="profile"
-            />
-            <div class="friendPage col-12 text-end">
-              <a href="#">
-                <span class="userName">Name</span>
-              </a>
-            </div>
-          </div>
-        </template>
-      </div>
-    </div>
-
     <form class="d-flex" role="search">
-      <input
-        class="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
+
+    <div id="friendsFriendslist">
+      <template id="userCardTemplate">
+        <button class="card friendPage text-center w-100">
+          <span class="userName">Name</span>
+          <span class="numTournaments">Tournaments: </span>
+        </button>
+      </template>
+    </div>
 
     <site-footer></site-footer>
 
