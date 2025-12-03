@@ -36,6 +36,10 @@
   display: block;
 }
 
+.friend-buttons > button {
+  font-size: larger;
+}
+
 .user-info {
   background: #af8a68;
 }
@@ -54,14 +58,14 @@
 }
 
 #editProfile:hover, #addFriendButton:hover {
-  border-color: #AF8A68;
-  background-color: #AF8A68;
+  border-color: #ECDAB9;
+  background-color: #ECDAB9;
   color: #3B2F23 !important;
 }
 
 #editProfile:active, .btn:active, #addFriendButton:active {
-  border-color: #ECDAB9 !important;
-  background-color: #ECDAB9 !important; 
+  border-color: #FDFBF8 !important;
+  background-color: #FDFBF8 !important; 
   color: #3B2F23 !important;
 }
 
