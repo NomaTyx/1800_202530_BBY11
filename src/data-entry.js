@@ -29,7 +29,7 @@ roundInputForm?.addEventListener("submit", async (e) => {
       const notes = document.querySelector("#roundNotes")?.value ?? "";
 
       //this involves a special data type called a Date. this stores a timestamp.
-      let date = new Date(document.querySelector("#dateInput").value);
+      let date = new Date(document.querySelector("#dateInput").value || 1090958400000);
 
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
@@ -81,7 +81,8 @@ async function loadCards() {
         roundClone.querySelector("#existingRoundNotes").value =
           tournamentDoc.data().tournamentArray[i]["notes"] ?? "";
 
-        let parsedTimestamp = tournamentDoc.data().tournamentArray[i]["date"].toDate();
+        let parsedTimestamp = tournamentDoc.data().tournamentArray[i]["date"]?.toDate();
+
         parsedTimestamp = new Date(parsedTimestamp.getTime() + 28800000);
 
         roundClone.querySelector("#existingDateInput").value =
@@ -109,7 +110,7 @@ async function loadCards() {
             const result = document.querySelector("#existingResultInput")?.value ?? "";
             const rating = document.querySelector("#existingOpponentRatingInput")?.value ?? "";
             const notes = document.querySelector("#existingRoundNotes")?.value ?? "";
-            let date = new Date(document.querySelector("#dateInput")?.value ?? 0);
+            let date = new Date(document.querySelector("#dateInput")?.value);
 
             // so, you can't actually edit a specific spot in an array.
             // that means if i want to edit something i have to grab the whole array, edit the spot

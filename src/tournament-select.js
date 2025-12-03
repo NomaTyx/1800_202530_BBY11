@@ -38,25 +38,40 @@ async function loadCards() {
         let mindate;
         let maxdate;
         if (doc.data().tournamentArray.length > 0) {
-          mindate = doc.data().tournamentArray[0]["date"].toDate();
-          maxdate = doc.data().tournamentArray[0]["date"].toDate();
+          mindate = doc.data().tournamentArray[0]["date"]?.toDate();
+          maxdate = doc.data().tournamentArray[0]["date"]?.toDate();
           //read data and store the relevant bits
           for (let j = 0; j <= doc.data().tournamentArray.length - 1; j++) {
             score += Number(doc.data().tournamentArray[j]["result"]);
             numRounds++;
             if (doc.data().tournamentArray[j]["date"] > maxdate) {
-              maxdate = doc.data().tournamentArray[j]["date"];
-            } else if (doc.data().tournamentArray[j]["date"] < mindate) {
-              mindate = doc.data().tournamentArray[j]["date"];
+              maxdate = doc.data().tournamentArray[j]["date"].toDate();
+            }
+            if (doc.data().tournamentArray[j]["date"] < mindate) {
+              mindate = doc.data().tournamentArray[j]["date"].toDate();
             }
           }
         }
+
+        mindate = new Date(mindate.getTime() + 28800000);
+        maxdate = new Date(maxdate.getTime() + 28800000);
 
         //populate cards with data
         newcard.querySelector(".tournamentName").textContent = doc.id;
         newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
         newcard.querySelector(".scoreText").textContent = "Score: " + score;
-        newcard.querySelector(".dateText").textContent = mindate + "-" + maxdate;
+        newcard.querySelector(".dateText").textContent =
+          mindate.getMonth() +
+          "/" +
+          mindate.getDate() +
+          "/" +
+          mindate.getFullYear() +
+          "-" +
+          maxdate.getMonth() +
+          "/" +
+          maxdate.getDate() +
+          "/" +
+          maxdate.getFullYear();
         newcard.querySelector(".viewTournamentButton").addEventListener("click", async () => {
           location.href = `data-entry.html?tournamentid=${doc.id}`;
         });
