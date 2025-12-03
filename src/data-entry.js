@@ -33,7 +33,7 @@ roundInputForm?.addEventListener("submit", async (e) => {
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
 
-      await setDoc(doc(userTournamentsRef, params.get("tournamentid")), {
+      await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
         //arrayunion says "take whatever was already there and append this to it"
         tournamentArray: arrayUnion({
           "color": color,
@@ -56,7 +56,6 @@ async function loadCards() {
       //grab the specified tournament doc
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
 
-      alert(tournamentDoc.data().tournamentArray.length);
       //the tournament docs consist of maps (one map per round), so we loop through each one
       for (let i = 0; i <= tournamentDoc.data().tournamentArray.length - 1; i++) {
         let roundClone = roundTemplate.content.cloneNode(true);
@@ -109,12 +108,12 @@ async function loadCards() {
             location.reload();
           });
         roundClone.querySelector("#deleteRoundButton").addEventListener("click", async () => {
-          alert(tournamentDoc.data().tournamentArray[i]["opponentName"]);
           //there may be a better way to do this but i'm scared
           //arrayRemove says "return the exact same array except remove the first instance of whatever was passed in"
           await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
             tournamentArray: arrayRemove({
               "color": tournamentDoc.data().tournamentArray[i]["color"],
+              "date": tournamentDoc.data().tournamentArray[i]["date"],
               "opponentName": tournamentDoc.data().tournamentArray[i]["opponentName"],
               "opponentRating": tournamentDoc.data().tournamentArray[i]["opponentRating"],
               "result": tournamentDoc.data().tournamentArray[i]["result"],
