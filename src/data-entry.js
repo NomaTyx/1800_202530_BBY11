@@ -103,6 +103,8 @@ async function loadCards() {
             //stops the form from refreshing the page
             e.preventDefault();
 
+            const thisRound = document.body.children[i];
+
             //grab values from form
             const oppName =
               document.querySelector("#existingOpponentNameInput")?.value?.trim() ?? "";
@@ -110,7 +112,7 @@ async function loadCards() {
             const result = document.querySelector("#existingResultInput")?.value ?? "";
             const rating = document.querySelector("#existingOpponentRatingInput")?.value ?? "";
             const notes = document.querySelector("#existingRoundNotes")?.value ?? "";
-            let date = new Date(document.querySelector("#dateInput")?.value);
+            let date = new Date(document.querySelector("#dateInput")?.value || 1090958400000);
 
             // so, you can't actually edit a specific spot in an array.
             // that means if i want to edit something i have to grab the whole array, edit the spot
@@ -118,6 +120,9 @@ async function loadCards() {
 
             //download the array
             let editedArray = tournamentDoc.data().tournamentArray;
+
+            // there is a bug-- this fetches the first instance of that ID
+            // which means that editing will always look for the fields in the FIRST round
 
             //edit the spot (leaving everything else untouched)
             editedArray[i] = {
