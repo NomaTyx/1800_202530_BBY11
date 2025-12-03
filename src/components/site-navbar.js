@@ -20,7 +20,7 @@ class SiteNavbar extends HTMLElement {
             <!-- Navbar: single source of truth -->
     <nav class="navbar navbar-expand-lg bg-warning">
       <div class="container-fluid">
-        <a class="navbar-brand" href="login.html">
+        <a class="navbar-brand" href="tournament-select.html">
           <img src="./images/uct-logo.svg" height="36" />
           UCT
         </a>
@@ -39,9 +39,6 @@ class SiteNavbar extends HTMLElement {
         <!-- Actual Nav items -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="login.html">Home</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="tournament-select.html">Tournaments</a>
             </li>
