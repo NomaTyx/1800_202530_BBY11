@@ -16,6 +16,8 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/data-entry.css" />
+    
   </head>
 
   <body>
@@ -61,7 +63,7 @@
         <label for="roundNotes">Notes</label>
         <textarea id="roundNotes"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary w-100">Add round</button>
+      <button type="submit" class="btn btn-primary w-100" id="add-round">Add round</button>
     </form>
 
     <div id="roundholder">
@@ -139,7 +141,7 @@
                     <label for="existingRoundNotes">Round notes</label>
                     <textarea id="existingRoundNotes"></textarea>
                   </div>
-                  <button type="submit" class="btn btn-primary w-100">Edit round</button>
+                  <button type="submit" class="btn btn-primary w-100" id="edit-round">Edit round</button>
                 </form>
                 <button id="deleteRoundButton" class="btn btn-primary w-100">Delete round</button>
               </div>
