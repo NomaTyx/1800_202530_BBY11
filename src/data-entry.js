@@ -29,7 +29,7 @@ roundInputForm?.addEventListener("submit", async (e) => {
       const notes = document.querySelector("#roundNotes")?.value ?? "";
 
       //this involves a special data type called a Date. this stores a timestamp.
-      let date = new Date(document.querySelector("#dateInput").value ?? 100000000000);
+      let date = new Date(document.querySelector("#dateInput").value);
 
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));

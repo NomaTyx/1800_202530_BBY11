@@ -35,13 +35,20 @@ async function loadCards() {
         let newcard = cardTemplate.content.cloneNode(true);
         let numRounds = 0;
         let score = 0;
-        let dates = "";
+        let mindate;
+        let maxdate;
         if (doc.data().tournamentArray.length > 0) {
+          mindate = doc.data().tournamentArray[0]["date"].toDate();
+          maxdate = doc.data().tournamentArray[0]["date"].toDate();
           //read data and store the relevant bits
           for (let j = 0; j <= doc.data().tournamentArray.length - 1; j++) {
             score += Number(doc.data().tournamentArray[j]["result"]);
             numRounds++;
-            dates += doc.data().tournamentArray[j]["date"];
+            if (doc.data().tournamentArray[j]["date"] > maxdate) {
+              maxdate = doc.data().tournamentArray[j]["date"];
+            } else if (doc.data().tournamentArray[j]["date"] < mindate) {
+              mindate = doc.data().tournamentArray[j]["date"];
+            }
           }
         }
 
@@ -49,7 +56,7 @@ async function loadCards() {
         newcard.querySelector(".tournamentName").textContent = doc.id;
         newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
         newcard.querySelector(".scoreText").textContent = "Score: " + score;
-        newcard.querySelector(".dateText").textContent = "Score: " + score;
+        newcard.querySelector(".dateText").textContent = mindate + "-" + maxdate;
         newcard.querySelector(".viewTournamentButton").addEventListener("click", async () => {
           location.href = `data-entry.html?tournamentid=${doc.id}`;
         });
