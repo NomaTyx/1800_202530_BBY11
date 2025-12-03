@@ -62,7 +62,8 @@ async function loadCards() {
       //the tournament docs consist of maps (one map per round), so we loop through each one
       for (let i = 0; i <= tournamentDoc.data().tournamentArray.length - 1; i++) {
         let roundClone = roundTemplate.content.cloneNode(true);
-        //populate cards with data (each round has its own data
+
+        //populate cards with data (each round has its own data)
         roundClone.querySelector("#roundnumber").textContent = `Round ${i + 1}`;
 
         roundClone.querySelector("#existingOpponentNameInput").value =
@@ -84,6 +85,7 @@ async function loadCards() {
           tournamentDoc.data().tournamentArray[i]["notes"] ?? "";
 
         //here is where we set the IDs so that the accordion buttons can communicate with each other
+        //bsTarget is essentially "when i click this, which thing collapses"
         roundClone.querySelector("#roundnumber").dataset.bsTarget = `#collapse${i}`;
         roundClone.querySelector("#collapse1").id = `collapse${i}`;
 
@@ -102,16 +104,27 @@ async function loadCards() {
             const rating = document.querySelector("#existingOpponentRatingInput")?.value ?? "";
             const notes = document.querySelector("#existingRoundNotes")?.value ?? "";
 
+            // so, you can't actually edit a specific spot in an array.
+            // that means if i want to edit something i have to grab the whole array, edit the spot
+            // and chuck it back onto firebase. so let's do that
+
+            //download the array
+            let editedArray = tournamentDoc.data().tournamentArray;
+
+            //edit the spot (leaving everything else untouched)
+            editedArray[i] = {
+              "color": color,
+              "opponentName": oppName,
+              "result": result,
+              "date": date,
+              "opponentRating": rating,
+              "notes": notes,
+            };
+
+            //chuck it back up to firebase
             await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
               //set the round number
-              tournamentArray: arrayUnion({
-                "color": color,
-                "opponentName": oppName,
-                "result": result,
-                "date": date,
-                "opponentRating": rating,
-                "notes": notes,
-              }),
+              tournamentArray: editedArray,
             });
             location.reload();
           });
