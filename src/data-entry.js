@@ -29,6 +29,7 @@ roundInputForm?.addEventListener("submit", async (e) => {
       const result = document.querySelector("#resultInput")?.value ?? "";
       const date = document.querySelector("#dateInput")?.value ?? "";
       const rating = document.querySelector("#opponentRatingInput")?.value ?? "";
+      const notes = document.querySelector("#roundNotes")?.value ?? "";
 
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
@@ -41,8 +42,10 @@ roundInputForm?.addEventListener("submit", async (e) => {
           "result": result,
           "date": date,
           "opponentRating": rating,
+          "notes": notes,
         }),
       });
+      location.reload();
     }
   });
 });
@@ -77,6 +80,9 @@ async function loadCards() {
         roundClone.querySelector("#existingDateInput").value =
           tournamentDoc.data().tournamentArray[i]["date"] ?? "";
 
+        roundClone.querySelector("#existingRoundNotes").value =
+          tournamentDoc.data().tournamentArray[i]["notes"] ?? "";
+
         //here is where we set the IDs so that the accordion buttons can communicate with each other
         roundClone.querySelector("#roundnumber").dataset.bsTarget = `#collapse${i}`;
         roundClone.querySelector("#collapse1").id = `collapse${i}`;
@@ -94,6 +100,7 @@ async function loadCards() {
             const result = document.querySelector("#existingResultInput")?.value ?? "";
             const date = document.querySelector("#existingDateInput")?.value ?? "";
             const rating = document.querySelector("#existingOpponentRatingInput")?.value ?? "";
+            const notes = document.querySelector("#existingRoundNotes")?.value ?? "";
 
             await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
               //set the round number
@@ -103,6 +110,7 @@ async function loadCards() {
                 "result": result,
                 "date": date,
                 "opponentRating": rating,
+                "notes": notes,
               }),
             });
             location.reload();
@@ -117,6 +125,7 @@ async function loadCards() {
               "opponentName": tournamentDoc.data().tournamentArray[i]["opponentName"],
               "opponentRating": tournamentDoc.data().tournamentArray[i]["opponentRating"],
               "result": tournamentDoc.data().tournamentArray[i]["result"],
+              "notes": tournamentDoc.data().tournamentArray[i]["notes"],
             }),
           });
           location.reload();
