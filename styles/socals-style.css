@@ -6,6 +6,7 @@
 #3B2F23 - dark brown
 #1E1812 - really dark brown
 */
+
 .Username {
   font-weight: 800;
 }
@@ -40,26 +41,37 @@
   font-size: larger;
 }
 
-.user-info {
-  background: #af8a68;
+.card {
+  height: 125px;
+  
+  .user-info {
+    background: #AF8A68;
+    border-top: 3px solid #3B2F23;
+    color: #3B2F23;
+  }
+
+  h5 {
+    font-size: 25px;
+  }
+
+  .bio-box, .card {
+    height: 50px;
+  }
 }
 
 #editProfile, #addFriendButton {
-  border-color: #3B2F23;
-  background-color: #3B2F23;
+  float: right;
+  border-color: #3B2F23 !important;
+  background-color: #3B2F23 !important;
   color: #AF8A68 !important;
   height: 70%;
   width: 95%;
   font-size: larger;
-
-  img {
-    margin-right: 5%;
-  }
 }
 
 #editProfile:hover, #addFriendButton:hover {
-  border-color: #ECDAB9;
-  background-color: #ECDAB9;
+  border-color: #ECDAB9 !important;
+  background-color: #ECDAB9 !important;
   color: #3B2F23 !important;
 }
 
