@@ -36,7 +36,7 @@ async function displayFriendInfo() {
   //gotta see if the user is friends with
   const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
   let isFriend = false;
-  for (let i = 0; i < currentUserDocRef.data().friends.length; i++) {
+  for (let i = 0; i < currentUserDocRef.data().friends?.length; i++) {
     if (currentUserDocRef.data().friends[i] == id) {
       isFriend = true;
     }
@@ -51,7 +51,11 @@ async function displayFriendInfo() {
   } else {
     document.getElementById("addFriendButton").addEventListener("click", async () => {
       onAuthStateChanged(auth, (user) => {
-        updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+        if (currentUserDocRef.data().friends) {
+          updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+        } else {
+          setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+        }
       });
     });
   }

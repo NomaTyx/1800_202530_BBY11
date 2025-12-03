@@ -16,6 +16,8 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/data-entry.css" />
+    
   </head>
 
   <body>
@@ -31,30 +33,22 @@
     <form id="roundInputForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary" novalidate>
       <div class="mb-3">
         <h2>New Round</h2>
-        <input
-          type="text"
-          id="opponentNameInput"
-          class="form-control"
-          placeholder="Opponent name"
-          required
-        />
+        <label for="opponentNameInput">Opponent's name</label>
+        <input type="text" id="opponentNameInput" class="form-control" required />
       </div>
       <div class="mb-3">
-        <input
-          type="text"
-          id="opponentRatingInput"
-          class="form-control"
-          placeholder="Opponent rating"
-          required
-        />
+        <label for="opponentRatingInput">Opponent's rating</label>
+        <input type="text" id="opponentRatingInput" class="form-control" required />
       </div>
       <div class="mb-3">
+        <label for="colorInput">Color you played</label>
         <select id="colorInput" class="form-control">
           <option value="white">White</option>
           <option value="black">Black</option>
         </select>
       </div>
       <div class="mb-3">
+        <label for="resultInput">Result</label>
         <select id="resultInput" class="form-control">
           <option value="1">Won</option>
           <option value="0">Lost</option>
@@ -62,9 +56,14 @@
         </select>
       </div>
       <div class="mb-3">
+        <label for="dateInput">Date</label>
         <input type="date" id="dateInput" class="form-control" placeholder="date" required />
       </div>
-      <button type="submit" class="btn btn-primary w-100">Add round</button>
+      <div class="mb-3">
+        <label for="roundNotes">Notes</label>
+        <textarea class="form-control" id="roundNotes" placeholder="Add your notes here"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" id="add-round">Add round</button>
     </form>
 
     <div id="roundholder">
@@ -96,30 +95,32 @@
                   novalidate
                 >
                   <div class="mb-3">
+                    <label for="existingOpponentNameInput">Opponent's name</label>
                     <input
                       type="text"
                       id="existingOpponentNameInput"
                       class="form-control"
-                      placeholder="Opponent name"
                       required
                     />
                   </div>
                   <div class="mb-3">
+                    <label for="existingOpponentRatingInput">Opponent's rating</label>
                     <input
                       type="text"
                       id="existingOpponentRatingInput"
                       class="form-control"
-                      placeholder="Opponent rating"
                       required
                     />
                   </div>
                   <div class="mb-3">
+                    <label for="existingColorInput">Color you played</label>
                     <select id="existingColorInput" class="form-control">
                       <option value="white">White</option>
                       <option value="black">Black</option>
                     </select>
                   </div>
                   <div class="mb-3">
+                    <label for="existingResultInput">Result</label>
                     <select id="existingResultInput" class="form-control">
                       <option value="1">Won</option>
                       <option value="0">Lost</option>
@@ -127,6 +128,7 @@
                     </select>
                   </div>
                   <div class="mb-3">
+                    <label for="existingDateInput">Date</label>
                     <input
                       type="date"
                       id="existingDateInput"
@@ -135,7 +137,11 @@
                       required
                     />
                   </div>
-                  <button type="submit" class="btn btn-primary w-100">Edit round</button>
+                  <div class="mb-3">
+                    <label for="existingRoundNotes">Round notes</label>
+                    <textarea class="form-control" id="existingRoundNotes"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100" id="edit-round">Edit round</button>
                 </form>
                 <button id="deleteRoundButton" class="btn btn-primary w-100">Delete round</button>
               </div>
@@ -145,7 +151,7 @@
       </template>
     </div>
 
-    <button id="deleteTournamentButton">Delete Tournament</button>
+    <button class="btn btn-primary" id="deleteTournamentButton">Delete Tournament</button>
 
     <site-footer></site-footer>
 

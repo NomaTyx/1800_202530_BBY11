@@ -35,19 +35,43 @@ async function loadCards() {
         let newcard = cardTemplate.content.cloneNode(true);
         let numRounds = 0;
         let score = 0;
-
+        let mindate;
+        let maxdate;
         if (doc.data().tournamentArray.length > 0) {
+          mindate = doc.data().tournamentArray[0]["date"]?.toDate();
+          maxdate = doc.data().tournamentArray[0]["date"]?.toDate();
           //read data and store the relevant bits
           for (let j = 0; j <= doc.data().tournamentArray.length - 1; j++) {
             score += Number(doc.data().tournamentArray[j]["result"]);
             numRounds++;
+            if (doc.data().tournamentArray[j]["date"] > maxdate) {
+              maxdate = doc.data().tournamentArray[j]["date"].toDate();
+            }
+            if (doc.data().tournamentArray[j]["date"] < mindate) {
+              mindate = doc.data().tournamentArray[j]["date"].toDate();
+            }
           }
         }
+
+        mindate = new Date(mindate.getTime() + 28800000);
+        maxdate = new Date(maxdate.getTime() + 28800000);
 
         //populate cards with data
         newcard.querySelector(".tournamentName").textContent = doc.id;
         newcard.querySelector(".roundsText").textContent = "Rounds: " + numRounds;
         newcard.querySelector(".scoreText").textContent = "Score: " + score;
+        newcard.querySelector(".dateText").textContent =
+          mindate.getMonth() +
+          "/" +
+          mindate.getDate() +
+          "/" +
+          mindate.getFullYear() +
+          "-" +
+          maxdate.getMonth() +
+          "/" +
+          maxdate.getDate() +
+          "/" +
+          maxdate.getFullYear();
         newcard.querySelector(".viewTournamentButton").addEventListener("click", async () => {
           location.href = `data-entry.html?tournamentid=${doc.id}`;
         });
@@ -77,6 +101,10 @@ async function seedTourneys() {
 function addTourneyData() {
   const tourneysRef = collection(db, "users", currUser.uid, "tournamentData");
   console.log("Adding sample tournament data...");
+  let date = new Date(0);
+  date.setFullYear(2025);
+  date.setMonth(2);
+  date.setDate(23);
   setDoc(doc(tourneysRef, "daniel naroditsky memorial"), {
     tournamentArray: [
       {
@@ -84,18 +112,21 @@ function addTourneyData() {
         opponentName: "bruce",
         opponentRating: "2800",
         result: 0,
+        date: date,
       },
       {
         color: "white",
         opponentName: "umanga",
         opponentRating: "200",
         result: 1,
+        date: date,
       },
       {
         color: "black",
         opponentName: "grace",
         opponentRating: "1500",
         result: 0,
+        date: date,
       },
     ],
   });
@@ -106,18 +137,21 @@ function addTourneyData() {
         opponentName: "bruce2",
         opponentRating: "2800",
         result: 0,
+        date: date,
       },
       {
         color: "white",
         opponentName: "umanga2",
         opponentRating: "200",
         result: 1,
+        date: date,
       },
       {
         color: "black",
         opponentName: "grace2",
         opponentRating: "1500",
         result: 0,
+        date: date,
       },
     ],
   });
@@ -128,18 +162,21 @@ function addTourneyData() {
         opponentName: "bruce3",
         opponentRating: "2800",
         result: 0,
+        date: date,
       },
       {
         color: "white",
         opponentName: "umanga3",
         opponentRating: "200",
         result: 1,
+        date: date,
       },
       {
         color: "black",
         opponentName: "grace3",
         opponentRating: "1500",
         result: 0,
+        date: date,
       },
     ],
   });
