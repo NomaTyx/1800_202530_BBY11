@@ -2,9 +2,7 @@ import {
   doc,
   getDoc,
   collection,
-  getDocs,
-  setDoc,
-  addDoc,
+  Timestamp,
   updateDoc,
   deleteDoc,
   arrayUnion,
@@ -27,9 +25,11 @@ roundInputForm?.addEventListener("submit", async (e) => {
       const oppName = document.querySelector("#opponentNameInput")?.value?.trim() ?? "";
       const color = document.querySelector("#colorInput")?.value?.trim() ?? "";
       const result = document.querySelector("#resultInput")?.value ?? "";
-      const date = document.querySelector("#dateInput")?.value ?? "";
       const rating = document.querySelector("#opponentRatingInput")?.value ?? "";
       const notes = document.querySelector("#roundNotes")?.value ?? "";
+
+      //this involves a special data type called a Date. this stores a timestamp.
+      let date = new Date(document.querySelector("#dateInput").value ?? 100000000000);
 
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
       let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
@@ -78,11 +78,18 @@ async function loadCards() {
         roundClone.querySelector("#existingResultInput").value =
           tournamentDoc.data().tournamentArray[i]["result"] ?? "";
 
-        roundClone.querySelector("#existingDateInput").value =
-          tournamentDoc.data().tournamentArray[i]["date"] ?? "";
-
         roundClone.querySelector("#existingRoundNotes").value =
           tournamentDoc.data().tournamentArray[i]["notes"] ?? "";
+
+        let parsedTimestamp = tournamentDoc.data().tournamentArray[i]["date"].toDate();
+        parsedTimestamp = new Date(parsedTimestamp.getTime() + 28800000);
+
+        roundClone.querySelector("#existingDateInput").value =
+          parsedTimestamp.getFullYear() +
+          "-" +
+          (parsedTimestamp.getMonth() + 1).toString().padStart(2, "0") +
+          "-" +
+          parsedTimestamp.getDate().toString().padStart(2, "0");
 
         //here is where we set the IDs so that the accordion buttons can communicate with each other
         //bsTarget is essentially "when i click this, which thing collapses"
@@ -100,9 +107,9 @@ async function loadCards() {
               document.querySelector("#existingOpponentNameInput")?.value?.trim() ?? "";
             const color = document.querySelector("#existingColorInput")?.value?.trim() ?? "";
             const result = document.querySelector("#existingResultInput")?.value ?? "";
-            const date = document.querySelector("#existingDateInput")?.value ?? "";
             const rating = document.querySelector("#existingOpponentRatingInput")?.value ?? "";
             const notes = document.querySelector("#existingRoundNotes")?.value ?? "";
+            let date = new Date(document.querySelector("#dateInput")?.value ?? 0);
 
             // so, you can't actually edit a specific spot in an array.
             // that means if i want to edit something i have to grab the whole array, edit the spot
@@ -126,7 +133,6 @@ async function loadCards() {
               //set the round number
               tournamentArray: editedArray,
             });
-            location.reload();
           });
         roundClone.querySelector("#deleteRoundButton").addEventListener("click", async () => {
           //there may be a better way to do this but i'm scared
