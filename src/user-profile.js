@@ -35,6 +35,7 @@ async function displayFriendInfo() {
 
   const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
 
+  //button is going to have different functionality depending on if the user is already a friend
   if (isFriend()) {
     document.getElementById("addFriendButton").textContent = "Remove friend";
     document.getElementById("addFriendButton").addEventListener("click", async () => {
@@ -42,19 +43,18 @@ async function displayFriendInfo() {
     });
   } else {
     document.getElementById("addFriendButton").addEventListener("click", async () => {
-      onAuthStateChanged(auth, (user) => {
-        if (currentUserDocRef.data().friends?.length > 0) {
-          updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
-        } else {
-          setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
-        }
-      });
+      //I'm pretty sure setDoc does not play well with arrayUnion, but I have not tested this exhaustively.
+      if (currentUserDocRef.data().friends?.length > 0) {
+        updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+      } else {
+        setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+      }
     });
   }
 }
 
 export async function isFriend() {
-  //gotta see if the user is friends with
+  //gotta see if the user is friends with the current user.
   const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
   for (let i = 0; i < currentUserDocRef.data().friends?.length; i++) {
     if (currentUserDocRef.data().friends[i] == getUserIDFromUrl()) {
