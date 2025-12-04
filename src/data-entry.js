@@ -103,16 +103,18 @@ async function loadCards() {
             //stops the form from refreshing the page
             e.preventDefault();
 
-            const thisRound = document.body.children[i];
+            let thisRound = document.getElementById("roundholder").children[i + 1];
 
             //grab values from form
             const oppName =
-              document.querySelector("#existingOpponentNameInput")?.value?.trim() ?? "";
+              thisRound.querySelector("#existingOpponentNameInput").value.trim() ?? "";
             const color = document.querySelector("#existingColorInput")?.value?.trim() ?? "";
             const result = document.querySelector("#existingResultInput")?.value ?? "";
             const rating = document.querySelector("#existingOpponentRatingInput")?.value ?? "";
             const notes = document.querySelector("#existingRoundNotes")?.value ?? "";
-            let date = new Date(document.querySelector("#dateInput")?.value || 1090958400000);
+            let date = new Date(
+              document.querySelector("#existingDateInput")?.value || 1090958400000
+            );
 
             // so, you can't actually edit a specific spot in an array.
             // that means if i want to edit something i have to grab the whole array, edit the spot
