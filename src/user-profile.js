@@ -33,25 +33,17 @@ async function displayFriendInfo() {
   const bio = friend.bio;
   document.getElementById("bioText").textContent = bio;
 
-  //gotta see if the user is friends with
   const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
-  let isFriend = false;
-  for (let i = 0; i < currentUserDocRef.data().friends?.length; i++) {
-    if (currentUserDocRef.data().friends[i] == id) {
-      isFriend = true;
-    }
-  }
-  if (isFriend) {
+
+  if (isFriend()) {
     document.getElementById("addFriendButton").textContent = "Remove friend";
     document.getElementById("addFriendButton").addEventListener("click", async () => {
-      onAuthStateChanged(auth, (user) => {
-        updateDoc(doc(db, "users", user.uid), { friends: arrayRemove(id) });
-      });
+      updateDoc(doc(db, "users", auth.currentUser.uid), { friends: arrayRemove(id) });
     });
   } else {
     document.getElementById("addFriendButton").addEventListener("click", async () => {
       onAuthStateChanged(auth, (user) => {
-        if (currentUserDocRef.data().friends) {
+        if (currentUserDocRef.data().friends?.length > 0) {
           updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
         } else {
           setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
@@ -59,6 +51,17 @@ async function displayFriendInfo() {
       });
     });
   }
+}
+
+export async function isFriend() {
+  //gotta see if the user is friends with
+  const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
+  for (let i = 0; i < currentUserDocRef.data().friends?.length; i++) {
+    if (currentUserDocRef.data().friends[i] == getUserIDFromUrl()) {
+      return true;
+    }
+  }
+  return false;
 }
 
 async function loadCards() {
