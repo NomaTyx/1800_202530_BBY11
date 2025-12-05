@@ -19,38 +19,41 @@ function getUserIDFromUrl() {
 
 //Fetch friend and display its name and image
 async function displayFriendInfo() {
-  const id = getUserIDFromUrl();
+  onAuthStateChanged(auth, async (user) => {
+    const id = getUserIDFromUrl();
 
-  const friendRef = doc(db, "users", id);
-  const friendSnap = await getDoc(friendRef);
-  const friend = friendSnap.data();
+    const friendRef = doc(db, "users", id);
+    const friendSnap = await getDoc(friendRef);
+    const friend = friendSnap.data();
 
-  //update the page to have the users name
-  const name = friend.name;
-  document.getElementById("usernameDisplay").textContent = name;
+    //update the page to have the users name
+    const name = friend.name;
+    document.getElementById("usernameDisplay").textContent = name;
 
-  //update the user bio
-  const bio = friend.bio;
-  document.getElementById("bioText").textContent = bio;
+    //update the user bio
+    const bio = friend.bio;
+    document.getElementById("bioText").textContent = bio;
 
-  const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
+    const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
 
-  //button is going to have different functionality depending on if the user is already a friend
-  if (isFriend()) {
-    document.getElementById("addFriendButton").textContent = "Remove friend";
-    document.getElementById("addFriendButton").addEventListener("click", async () => {
-      updateDoc(doc(db, "users", auth.currentUser.uid), { friends: arrayRemove(id) });
-    });
-  } else {
-    document.getElementById("addFriendButton").addEventListener("click", async () => {
-      //I'm pretty sure setDoc does not play well with arrayUnion, but I have not tested this exhaustively.
-      if (currentUserDocRef.data().friends?.length > 0) {
-        updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
-      } else {
-        setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
-      }
-    });
-  }
+    //button is going to have different functionality depending on if the user is already a friend
+    if (await isFriend()) {
+      document.getElementById("addFriendButton").textContent = "Remove friend";
+      document.getElementById("addFriendButton").addEventListener("click", async () => {
+        updateDoc(doc(db, "users", auth.currentUser.uid), { friends: arrayRemove(id) });
+      });
+    } else {
+      document.getElementById("addFriendButton").addEventListener("click", async () => {
+        //I'm pretty sure setDoc does not play well with arrayUnion, but I have not tested this exhaustively.
+        if (currentUserDocRef.data().friends?.length > 0) {
+          await updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+        } else {
+          alert("this ran");
+          await setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+        }
+      });
+    }
+  });
 }
 
 export async function isFriend() {

@@ -55,42 +55,46 @@ async function displayUserInfo() {
 
 async function displayCardsDynamically() {
   onAuthStateChanged(auth, async (user) => {
-    const cardTemplate = document.getElementById("socialsCardTemplate");
-    const container = document.getElementById("friendsGoHere");
+    if (user) {
+      const cardTemplate = document.getElementById("socialsCardTemplate");
+      const container = document.getElementById("friendsGoHere");
 
-    //try catch for created the dynamic cards
-    //waits for snapshot of document at absolute path to be returned
-    const userDoc = await getDoc(doc(db, "users", user.uid));
+      //try catch for created the dynamic cards
+      //waits for snapshot of document at absolute path to be returned
+      const userDoc = await getDoc(doc(db, "users", user.uid));
 
-    //friendsList.data().friends gets the array at the property "friends" of the doc "friendsList"
+      //friendsList.data().friends gets the array at the property "friends" of the doc "friendsList"
 
-    if (userDoc.data().friends?.length > 0) {
-      for (let i = 0; i < userDoc.data().friends.length; i++) {
-        //clone of card template
-        const newcard = cardTemplate.content.cloneNode(true);
+      if (userDoc.data().friends?.length > 0) {
+        for (let i = 0; i < userDoc.data().friends.length; i++) {
+          //clone of card template
+          const newcard = cardTemplate.content.cloneNode(true);
 
-        //friend's user ID
-        const friendId = userDoc.data().friends[i];
+          //friend's user ID
+          const friendId = userDoc.data().friends[i];
 
-        const userName = newcard.querySelector(".userName");
-        let friendReference = await getDoc(doc(db, "users", userDoc.data().friends[i]));
+          const userName = newcard.querySelector(".userName");
+          let friendReference = await getDoc(doc(db, "users", userDoc.data().friends[i]));
 
-        //if the user with this user id has no name, "unknown user" is displayed instead.
-        let friendName = friendReference.data()?.name ?? "Unknown user";
+          //if the user with this user id has no name, "unknown user" is displayed instead.
+          let friendName = friendReference.data()?.name ?? "Unknown user";
 
-        userName.textContent = friendName;
+          userName.textContent = friendName;
 
-        //takes you to that friend's profile page
-        newcard.getElementById("friendProfileButton").addEventListener("click", () => {
-          location.href = `/user-profile.html?userid=${friendId}`;
-        });
+          //takes you to that friend's profile page
+          newcard.getElementById("friendProfileButton").addEventListener("click", () => {
+            location.href = `/user-profile.html?userid=${friendId}`;
+          });
 
-        container.appendChild(newcard);
+          container.appendChild(newcard);
+        }
+      } else {
+        let t = document.createElement("h2");
+        t.textContent = "Unfortunately, you have no friends.";
+        container.appendChild(t);
       }
     } else {
-      let t = document.createElement("h2");
-      t.textContent = "Unfortunately, you have no friends.";
-      container.appendChild(t);
+      location.href = "login.html";
     }
   });
 }
