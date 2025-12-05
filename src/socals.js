@@ -64,34 +64,33 @@ async function displayCardsDynamically() {
 
     //friendsList.data().friends gets the array at the property "friends" of the doc "friendsList"
 
-    if (userDoc.data().friends) {
+    if (userDoc.data().friends?.length > 0) {
       for (let i = 0; i < userDoc.data().friends.length; i++) {
         //clone of card template
         const newcard = cardTemplate.content.cloneNode(true);
 
-        //TODO: Make this point to the friend's profile by adding an event listener
-        const link = newcard.querySelector(".friendPage");
+        //friend's user ID
         const friendId = userDoc.data().friends[i];
-        link.href = `/src/user-profile.html?docID=${friendId}`;
 
         const userName = newcard.querySelector(".userName");
         let friendReference = await getDoc(doc(db, "users", userDoc.data().friends[i]));
+
         //if the user with this user id has no name, "unknown user" is displayed instead.
         let friendName = friendReference.data()?.name ?? "Unknown user";
 
         userName.textContent = friendName;
 
+        //takes you to that friend's profile page
         newcard.getElementById("friendProfileButton").addEventListener("click", () => {
           location.href = `/user-profile.html?userid=${friendId}`;
         });
 
         container.appendChild(newcard);
-        console.log(`Successfully loaded ${userDoc.data().length} friends`);
       }
     } else {
       let t = document.createElement("h1");
       t.textContent = "Unfortunately, you have no friends.";
-      container.appendChild;
+      container.appendChild(t);
     }
   });
 }

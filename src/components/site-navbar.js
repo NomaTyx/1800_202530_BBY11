@@ -17,7 +17,6 @@ class SiteNavbar extends HTMLElement {
 
   renderNavbar() {
     this.innerHTML = `
-            <!-- Navbar: single source of truth -->
     <nav class="navbar navbar-expand-lg bg-warning">
       <div class="container-fluid">
         <a class="navbar-brand" href="tournament-select.html">

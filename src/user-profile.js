@@ -33,32 +33,35 @@ async function displayFriendInfo() {
   const bio = friend.bio;
   document.getElementById("bioText").textContent = bio;
 
-  //gotta see if the user is friends with
   const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
-  let isFriend = false;
-  for (let i = 0; i < currentUserDocRef.data().friends?.length; i++) {
-    if (currentUserDocRef.data().friends[i] == id) {
-      isFriend = true;
-    }
-  }
-  if (isFriend) {
+
+  //button is going to have different functionality depending on if the user is already a friend
+  if (isFriend()) {
     document.getElementById("addFriendButton").textContent = "Remove friend";
     document.getElementById("addFriendButton").addEventListener("click", async () => {
-      onAuthStateChanged(auth, (user) => {
-        updateDoc(doc(db, "users", user.uid), { friends: arrayRemove(id) });
-      });
+      updateDoc(doc(db, "users", auth.currentUser.uid), { friends: arrayRemove(id) });
     });
   } else {
     document.getElementById("addFriendButton").addEventListener("click", async () => {
-      onAuthStateChanged(auth, (user) => {
-        if (currentUserDocRef.data().friends) {
-          updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
-        } else {
-          setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
-        }
-      });
+      //I'm pretty sure setDoc does not play well with arrayUnion, but I have not tested this exhaustively.
+      if (currentUserDocRef.data().friends?.length > 0) {
+        updateDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+      } else {
+        setDoc(doc(db, "users", user.uid), { friends: arrayUnion(id) });
+      }
     });
   }
+}
+
+export async function isFriend() {
+  //gotta see if the user is friends with the current user.
+  const currentUserDocRef = await getDoc(doc(db, "users", auth.currentUser.uid));
+  for (let i = 0; i < currentUserDocRef.data().friends?.length; i++) {
+    if (currentUserDocRef.data().friends[i] == getUserIDFromUrl()) {
+      return true;
+    }
+  }
+  return false;
 }
 
 async function loadCards() {
@@ -77,8 +80,8 @@ async function loadCards() {
         let numRounds = 0;
         let score = 0;
 
+        //read data and store the relevant bits
         if (doc.data().tournamentArray.length > 0) {
-          //read data and store the relevant bits
           for (let j = 0; j <= doc.data().tournamentArray.length - 1; j++) {
             score += Number(doc.data().tournamentArray[j]["result"]);
             numRounds++;
