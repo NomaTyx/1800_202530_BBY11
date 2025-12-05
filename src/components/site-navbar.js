@@ -37,15 +37,15 @@ class SiteNavbar extends HTMLElement {
         </button>
         <!-- Actual Nav items -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="tournament-select.html">Tournaments</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn btn-primary" href="statistics.html">Statistics</a>
+              <a class="nav-link" href="statistics.html">Statistics</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn btn-primary" href="social.html">Socials</a>
+              <a class="nav-link" href="social.html">Socials</a>
             </li>
           </ul>
           <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
