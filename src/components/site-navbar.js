@@ -19,7 +19,7 @@ class SiteNavbar extends HTMLElement {
     this.innerHTML = `
     <nav class="navbar navbar-expand-lg bg-warning">
       <div class="container-fluid">
-        <a class="navbar-brand" href="tournament-select.html">
+        <a class="navbar-brand fs-3 fw-bold" href="tournament-select.html">
           <img src="./images/uct-logo.svg" height="36" />
           UCT
         </a>
@@ -39,13 +39,13 @@ class SiteNavbar extends HTMLElement {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="tournament-select.html">Tournaments</a>
+              <a class="nav-link fs-4 fw-bold" href="tournament-select.html">Tournaments</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="statistics.html">Statistics</a>
+              <a class="nav-link fs-4 fw-bold" href="statistics.html">Statistics</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="social.html">Socials</a>
+              <a class="nav-link fs-4 fw-bold" href="social.html">Socials</a>
             </li>
           </ul>
           <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
