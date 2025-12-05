@@ -23,6 +23,9 @@
       <div class="user-info row g-0">
         <div class="col-md-10">
           <div class="card-body">
+            <div id="profilePicture">
+              <img src="public\images\uct-logo.svg" alt="profile picture" />
+            </div>
             <div id="myModal" class="modal">
               <div class="modal-content">
                 <span class="close">&times;</span>
@@ -38,7 +41,9 @@
                 </div>
               </div>
             </div>
-            <h5 class="card-title Username" id="usernameDisplay">Username here</h5>
+            <h5 class="card-title Username" id="usernameDisplay">
+              Username here
+            </h5>
             <div id="biobox" class="bio-box card">
               <p id="bioText" class="card-text">"bio message could go here"</p>
             </div>
@@ -46,7 +51,9 @@
         </div>
         <!-- For Editing the User's Profile -->
         <div class="col">
-          <button class="btn btn-warning" id="editProfile">Edit Profile</button>
+          <button class="btn btn-warning pb-3" id="editProfile">
+            Edit Profile
+          </button>
         </div>
       </div>
     </div>
@@ -57,9 +64,13 @@
 
       <div class="friend-buttons row">
         <div id="friendNum" class="col-9">
-          <h1 id="numFriendsText">Friends(__)</h1>
+          <h1 id="numFriendsText">Friends()</h1>
         </div>
-        <button type="button" onclick="location.href='add-friend.html'" class="btn btn-warning">
+        <button
+          type="button"
+          onclick="location.href='add-friend.html'"
+          class="btn btn-warning text-center"
+        >
           Add Friends
         </button>
       </div>
@@ -105,7 +116,11 @@
           }
         </style>
         <div class="row p-3 border mb-3" id="friendCard">
-          <img class="card-image col-2 img-fluid" src="public\images\uct-logo.svg" alt="profile" />
+          <img
+            class="card-image col-2 img-fluid"
+            src="public\images\uct-logo.svg"
+            alt="profile"
+          />
           <button
             id="friendProfileButton"
             class="friendPage col-8 d-flex justify-content-center align-items-center"

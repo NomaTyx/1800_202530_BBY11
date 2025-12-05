@@ -88,7 +88,7 @@ async function displayCardsDynamically() {
         container.appendChild(newcard);
       }
     } else {
-      let t = document.createElement("h1");
+      let t = document.createElement("h2");
       t.textContent = "Unfortunately, you have no friends.";
       container.appendChild(t);
     }
