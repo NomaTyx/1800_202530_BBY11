@@ -26,8 +26,8 @@ async function displayTournamentData(color) {
     });
 }
 
-document.getElementById("getDataForWhite").addEventListener("click", displayTournamentData("white"));
-document.getElementById("getDataForBlack").addEventListener("click", displayTournamentData("black"));
+document.getElementById("getDataForWhite").addEventListener("click", () => displayTournamentData("white"));
+document.getElementById("getDataForBlack").addEventListener("click", () => displayTournamentData("black"));
 
 let resultData;
 
