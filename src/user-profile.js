@@ -80,8 +80,8 @@ async function loadCards() {
         let numRounds = 0;
         let score = 0;
 
+        //read data and store the relevant bits
         if (doc.data().tournamentArray.length > 0) {
-          //read data and store the relevant bits
           for (let j = 0; j <= doc.data().tournamentArray.length - 1; j++) {
             score += Number(doc.data().tournamentArray[j]["result"]);
             numRounds++;

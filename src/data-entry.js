@@ -11,7 +11,6 @@ import {
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
 
-const alertEl = document.getElementById("errorWithInput");
 const roundInputForm = document.getElementById("roundInputForm");
 const params = new URL(window.location.href).searchParams;
 
@@ -28,11 +27,11 @@ roundInputForm?.addEventListener("submit", async (e) => {
       const rating = document.querySelector("#opponentRatingInput")?.value ?? "";
       const notes = document.querySelector("#roundNotes")?.value ?? "";
 
-      //this involves a special data type called a Date. this stores a timestamp.
+      //this involves a special data type called a Date. this stores a number of milliseconds since 00:00 Jan 1, 1970.
+      //1090958400000, the default value, is Julia's birthday.
       let date = new Date(document.querySelector("#dateInput").value || 1090958400000);
 
       const userTournamentsRef = collection(db, "users", user.uid, "tournamentData");
-      let tournamentDoc = await getDoc(doc(userTournamentsRef, params.get("tournamentid")));
 
       await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
         //arrayunion says "take whatever was already there and append this to it"
@@ -45,6 +44,7 @@ roundInputForm?.addEventListener("submit", async (e) => {
           "notes": notes,
         }),
       });
+      //reload the page so that the round is immediately pulled onto the page from the DB.
       location.reload();
     }
   });
@@ -81,10 +81,11 @@ async function loadCards() {
         roundClone.querySelector("#existingRoundNotes").value =
           tournamentDoc.data().tournamentArray[i]["notes"] ?? "";
 
+        //we have to do some special logic
         let parsedTimestamp = tournamentDoc.data().tournamentArray[i]["date"]?.toDate();
-
         parsedTimestamp = new Date(parsedTimestamp.getTime() + 28800000);
 
+        //format the date as a string that works with a <date> element
         roundClone.querySelector("#existingDateInput").value =
           parsedTimestamp.getFullYear() +
           "-" +
@@ -103,6 +104,8 @@ async function loadCards() {
             //stops the form from refreshing the page
             e.preventDefault();
 
+            //look through the children of the round container and get this one
+            //i + 1 because the first child is a template
             let thisRound = document.getElementById("roundholder").children[i + 1];
 
             //grab values from form
@@ -123,9 +126,6 @@ async function loadCards() {
             //download the array
             let editedArray = tournamentDoc.data().tournamentArray;
 
-            // there is a bug-- this fetches the first instance of that ID
-            // which means that editing will always look for the fields in the FIRST round
-
             //edit the spot (leaving everything else untouched)
             editedArray[i] = {
               "color": color,
@@ -142,8 +142,8 @@ async function loadCards() {
               tournamentArray: editedArray,
             });
           });
+
         roundClone.querySelector("#deleteRoundButton").addEventListener("click", async () => {
-          //there may be a better way to do this but i'm scared
           //arrayRemove says "return the exact same array except remove the first instance of whatever was passed in"
           await updateDoc(doc(userTournamentsRef, params.get("tournamentid")), {
             tournamentArray: arrayRemove({
@@ -155,6 +155,7 @@ async function loadCards() {
               "notes": tournamentDoc.data().tournamentArray[i]["notes"],
             }),
           });
+          //reload the page automatically so that the deleted tournament can't be accessed anymore
           location.reload();
         });
         document.getElementById("roundholder").appendChild(roundClone);
@@ -171,22 +172,6 @@ async function loadCards() {
       location.href = "login.html";
     }
   });
-}
-
-// Show error message with accessibility and auto-hide
-let errorTimeout;
-function showError(msg) {
-  alertEl.textContent = msg || "";
-  alertEl.classList.remove("d-none");
-  clearTimeout(errorTimeout);
-  errorTimeout = setTimeout(hideError, 5000); // Auto-hide after 5s
-}
-
-// Hide error message
-function hideError() {
-  alertEl.classList.add("d-none");
-  alertEl.textContent = "";
-  clearTimeout(errorTimeout);
 }
 
 document.addEventListener("DOMContentLoaded", loadCards);
