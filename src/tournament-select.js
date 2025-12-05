@@ -2,6 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "/styles/component-style.css";
 
+
+//pages imported
+
 import { doc, collection, getDocs, setDoc, addDoc } from "firebase/firestore";
 import { auth, db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
