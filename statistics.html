@@ -13,7 +13,7 @@
     <script type="module" src="/src/components/site-footer.js"></script>
 
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/statistics.css" />
   </head>
 
   <body>
@@ -24,10 +24,43 @@
     <site-navbar></site-navbar>
 
     <!-- Add data entry stuff here :) -->
+    <div class="container text-center align-items-center justify-content-center"> 
+      <!-- Not sure how the graph will function, but for now I used reactive image. -->
+      <div class="stats-chart">
+        <template class="winrate-chart">
+          <dl>
+            <dt>Winrate</dt>
+            <dd><span class="text">Win</span></dd>
+            <dd><span class="text">Lost</span></dd>
+            <dd><span class="text">Win Rate</span></dd>
+          </dl>
+        </template>
+      </div>
 
-    <div class="container">
-      <site-footer></site-footer>
+      <div class="filter-buttons">
+        <h1>Colour Played</h1>
+        <button type="button" class="btn btn-warning btn-lg" id="getDataForWhite">White</button>
+        <button type="button" class="btn btn-warning btn-lg" id="getDataForBlack">Black</button>
+      </div>
+
+      <!-- I'm not sure if this will be the final way to get the date, but this will have to do. -->
+      <h1>Date Range</h1>
+      <div class="input-group mb-3">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="floatingStartDate">
+          <label for="floatingInput" id="startDate">Start Date</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="floatingEndDate">
+          <label for="floatingInput" id="endDate">End Date</label>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-warning btn-lg">Clear</button>
     </div>
+
+    <!-- our own footer goes here -->
+    <site-footer></site-footer>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
@@ -35,5 +68,6 @@
 
     <!-- Link to scripts of your own -->
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/statistics.js"></script>
   </body>
 </html>

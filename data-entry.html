@@ -1,49 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Data Entry Screen</title>
+    <title>Edit Tournament</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Other libraries go here -->
+    <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/data-entry.css" />
   </head>
 
   <body>
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
-    <!-- Stuff for body goes here -->
+
     <site-navbar></site-navbar>
 
-    <!-- Add data entry stuff here :) -->
-    <div class="card" style="width: 18rem">
-      <img class="card-img-top" src="..." alt="Card image cap" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+    <!-- Main content goes here -->
+
+    <div id="errorWithInput" class="alert alert-danger d-none" role="alert"></div>
+    <form id="roundInputForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary" novalidate>
+      <div class="mb-3">
+        <h2>New Round</h2>
+        <label for="opponentNameInput">Opponent's name</label>
+        <input type="text" id="opponentNameInput" class="form-control" required />
       </div>
-    </div>
-    <div class="container">
-      <site-footer></site-footer>
+      <div class="mb-3">
+        <label for="opponentRatingInput">Opponent's rating</label>
+        <input type="text" id="opponentRatingInput" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="colorInput">Color you played</label>
+        <select id="colorInput" class="form-control">
+          <option value="white">White</option>
+          <option value="black">Black</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="resultInput">Result</label>
+        <select id="resultInput" class="form-control">
+          <option value="1">Won</option>
+          <option value="0">Lost</option>
+          <option value="0.5">Drew</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="dateInput">Date</label>
+        <input type="date" id="dateInput" class="form-control" placeholder="date" required />
+      </div>
+      <div class="mb-3">
+        <label for="roundNotes">Notes</label>
+        <textarea class="form-control" id="roundNotes" placeholder="Add your notes here"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" id="add-round">Add round</button>
+    </form>
+
+    <div id="roundholder">
+      <template id="roundTemplate">
+        <div class="accordion accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                id="roundnumber"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse1"
+                aria-expanded="true"
+                aria-controls="collapse1"
+              >
+                Add round
+              </button>
+            </h2>
+            <div
+              id="collapse1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <form
+                  id="existingRoundInputForm"
+                  class="p-4 p-md-5 border rounded-3 bg-body-tertiary"
+                  novalidate
+                >
+                  <div class="mb-3">
+                    <label for="existingOpponentNameInput">Opponent's name</label>
+                    <input
+                      type="text"
+                      id="existingOpponentNameInput"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="existingOpponentRatingInput">Opponent's rating</label>
+                    <input
+                      type="text"
+                      id="existingOpponentRatingInput"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="existingColorInput">Color you played</label>
+                    <select id="existingColorInput" class="form-control">
+                      <option value="white">White</option>
+                      <option value="black">Black</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="existingResultInput">Result</label>
+                    <select id="existingResultInput" class="form-control">
+                      <option value="1">Won</option>
+                      <option value="0">Lost</option>
+                      <option value="0.5">Drew</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="existingDateInput">Date</label>
+                    <input
+                      type="date"
+                      id="existingDateInput"
+                      class="form-control"
+                      placeholder="date"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="existingRoundNotes">Round notes</label>
+                    <textarea class="form-control" id="existingRoundNotes"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100" id="edit-round">
+                    Edit round
+                  </button>
+                </form>
+                <button id="deleteRoundButton" class="btn btn-primary w-100">Delete round</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
     </div>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
+    <button class="btn btn-primary" id="deleteTournamentButton">Delete Tournament</button>
 
-    <!-- Link to scripts of your own -->
+    <site-footer></site-footer>
+
+    <!---------------------------------------------->
+    <!-- Your own JavaScript scripts go here      -->
+    <!---------------------------------------------->
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/data-entry.js"></script>
   </body>
 </html>

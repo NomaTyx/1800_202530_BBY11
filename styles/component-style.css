@@ -1,0 +1,29 @@
+site-navbar > .navbar, .navbar-expand-lg, .bg-warning > .container-fluid {
+    background-color: #AF8A68 !important;
+
+    a {
+        color: #3B2F23;
+    }
+
+    .nav-item > .nav-link, .active {
+        color: #3B2F23;
+    }
+
+    button {
+        color: #AF8A68;
+        border-color: #3B2F23;
+        background-color: #3B2F23;
+    }
+
+    button:hover {
+        color: #3B2F23;
+        border-color: #ECDAB9;
+        background-color: #ECDAB9;
+    }
+}
+
+site-footer > .py-3, .my-4, .border-top, .text-center {
+    .mb-0, .text-muted {
+        color: #3B2F23 !important;
+    }
+}

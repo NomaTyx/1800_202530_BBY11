@@ -1,0 +1,148 @@
+/* Colour Hex Codes
+#FDFBF8 - really light beige (Not sure if it's needed)
+#F7F3F0 - really light brown
+#ECDAB9 - light biege(?)
+#AF8A68 - light brown
+#3B2F23 - dark brown
+#1E1812 - really dark brown
+*/
+
+.Username {
+  font-weight: 800;
+}
+
+.userName {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: larger;
+  justify-content: center;
+}
+
+.friendPage a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 1%;
+}
+
+.col {
+  display: flex;
+  float: right;
+  align-items: center;
+}
+
+.bio_box {
+  display: block;
+}
+
+.friend-buttons > button {
+  font-size: larger;
+}
+
+.card {
+  height: auto; /* allow expansion */
+
+  .user-info {
+    background: #af8a68;
+    border-top: 3px solid #3b2f23;
+    color: #3b2f23;
+  }
+
+  h5 {
+    font-size: 25px;
+  }
+
+  .bio-box {
+    height: auto; /* allow bio to grow */
+  }
+}
+#editProfile,
+#addFriendButton {
+  float: right;
+  border-color: #3b2f23 !important;
+  background-color: #3b2f23 !important;
+  color: #af8a68 !important;
+  height: 70%;
+  width: 95%;
+  font-size: larger;
+}
+
+#editProfile:hover,
+#addFriendButton:hover {
+  border-color: #ecdab9 !important;
+  background-color: #ecdab9 !important;
+  color: #3b2f23 !important;
+}
+
+#editProfile:active,
+.btn:active,
+#addFriendButton:active {
+  border-color: #fdfbf8 !important;
+  background-color: #fdfbf8 !important;
+  color: #3b2f23 !important;
+}
+
+/* For the edit profile popup */
+.close {
+  font-size: larger;
+  margin-top: 0.5%;
+  margin-left: 1%;
+}
+
+label {
+  margin-top: 0.5%;
+}
+
+#bio {
+  margin-bottom: 1%;
+}
+
+label,
+#bio,
+#name {
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+h2 {
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+#submitBtn {
+  margin-right: 1.5%;
+  color: #3b2f23;
+  border-color: #af8a68;
+  background-color: #af8a68;
+}
+
+#submitBtn:hover {
+  color: #af8a68;
+  border-color: #3b2f23;
+  background-color: #3b2f23;
+}
+
+/* For add-friend.html */
+
+.numOfUsersFriends {
+  margin-bottom: 1%;
+}
+
+form {
+  margin-bottom: 2%;
+
+  .btn:active {
+    border-color: #fdfbf8 !important;
+    background-color: #fdfbf8 !important;
+    color: #3b2f23 !important;
+  }
+}
+
+#addFriendButton {
+  border-color: #3b2f23;
+  background-color: #3b2f23;
+  color: #af8a68;
+  font-size: larger;
+}

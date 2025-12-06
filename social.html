@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Data Entry Screen</title>
+    <title>Socials</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
@@ -11,28 +11,136 @@
     <!-- Other libraries go here -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
-
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/socals-style.css" />
   </head>
 
   <body>
-    <!------------------------------>
-    <!-- HTML Layout goes here -->
-    <!------------------------------>
     <site-navbar></site-navbar>
-
-    <!-- Add main website layout here -->
-
-    <div class="container">
-      <site-footer></site-footer>
+    <!-- bar that displays your username and bio and settings-->
+    <div class="card">
+      <div class="user-info row g-0">
+        <div class="col-md-10">
+          <div class="card-body">
+            <div id="profilePicture">
+              <img src="public\images\uct-logo.svg" alt="profile picture" />
+            </div>
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-header">
+                  <h2>Enter Information</h2>
+                </div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Edit name:" />
+                <label for="bio">Bio:</label>
+                <input type="text" id="bio" placeholder="Edit bio:" />
+                <div class="modal-footer">
+                  <button class="btn btn-warning" id="submitBtn">Submit</button>
+                </div>
+              </div>
+            </div>
+            <h5 class="card-title Username" id="usernameDisplay">
+              Username here
+            </h5>
+            <div id="biobox" class="bio-box card">
+              <p id="bioText" class="card-text">"bio message could go here"</p>
+            </div>
+          </div>
+        </div>
+        <!-- For Editing the User's Profile -->
+        <div class="col">
+          <button class="btn btn-warning pb-3" id="editProfile">
+            Edit Profile
+          </button>
+        </div>
+      </div>
     </div>
+
+    <div class="container align-items-center justify-content-center">
+      <!-- get a tournament component -->
+      <div class="tournamentContainer"></div>
+
+      <div class="friend-buttons row">
+        <div id="friendNum" class="col-9">
+          <h1 id="numFriendsText">Friends()</h1>
+        </div>
+        <button
+          type="button"
+          onclick="location.href='add-friend.html'"
+          class="btn btn-warning text-center"
+        >
+          Add Friends
+        </button>
+      </div>
+      <div id="friendsGoHere"></div>
+
+      <!-- template for cards-->
+      <template id="socialsCardTemplate">
+        <style>
+          #friendCard {
+            margin-top: 1%;
+            height: 80%;
+            border-radius: 10px;
+            background-color: #af8a68 !important;
+
+            img {
+              background-color: #ecdab9;
+              border-radius: 10px;
+              margin-right: 2%;
+            }
+
+            #friendProfileButton {
+              border-style: none;
+              background-color: transparent;
+            }
+          }
+
+          #friendCard:hover {
+            border-color: #3b2f23 !important;
+            background-color: #3b2f23 !important;
+
+            #friendProfileButton {
+              color: #af8a68;
+            }
+          }
+
+          #friendCard:active {
+            border-color: #fdfbf8 !important;
+            background-color: #fdfbf8 !important;
+
+            #friendProfileButton {
+              color: #3b2f23;
+            }
+          }
+        </style>
+        <div class="row p-3 border mb-3" id="friendCard">
+          <img
+            class="card-image col-2 img-fluid"
+            src="public\images\uct-logo.svg"
+            alt="profile"
+          />
+          <button
+            id="friendProfileButton"
+            class="friendPage col-8 d-flex justify-content-center align-items-center"
+          >
+            <h2 class="userName">Name</h2>
+          </button>
+        </div>
+      </template>
+    </div>
+
+    <site-footer></site-footer>
 
     <!---------------------------------------------->
     <!-- JavaScript functions go here    -->
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
+    <script type="module" src="./src/firebaseConfig.js"></script>
+    <script type="module" src="./src/authentication.js"></script>
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/socals.js"></script>
   </body>
 </html>

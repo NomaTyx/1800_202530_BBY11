@@ -53,11 +53,7 @@ export async function loginUser(email, password) {
 //   const user = await signupUser("Alice", "alice@email.com", "secret");
 // -------------------------------------------------------------
 export async function signupUser(name, email, password) {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
   await updateProfile(user, { displayName: name });
 
@@ -66,18 +62,10 @@ export async function signupUser(name, email, password) {
       name: name,
       email: email,
       country: "Canada", // Default value
-      school: "BCIT", // Default value
+      bio: "You haven't set a bio!",
     });
-    //no i don't understand why this works but im not going to FREAKING WORRY ABOUT IT
-    const parentDocRef = doc(db, "users", user.uid);
-    const subcollectionRef = collection(parentDocRef, "tournamentData");
-    await setDoc(doc(subcollectionRef, "placeholderTournament"), {
-      name: "hi",
-      email: "hello",
-    });
-    console.log("Firestore user document created successfully!");
   } catch (error) {
-    alert("THERE WAS AN ERROR");
+    alert("THERE WAS AN ERROR WITH SIGNUP");
     console.error("Error creating user document in Firestore:", error);
   }
 

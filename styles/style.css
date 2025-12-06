@@ -1,1 +1,83 @@
+/* Colour Hex Codes
+#FDFBF8 - really light beige (Not sure if it's needed)
+#F7F3F0 - really light brown
+#ECDAB9 - light biege(?)
+#AF8A68 - light brown
+#3B2F23 - dark brown
+*/
 
+.container,
+.col-xl-10,
+.col-xxl-8,
+.px-4,
+.py-5 {
+  color: #3b2f23;
+
+  .p-4,
+  .p-md-5,
+  .border,
+  .rounded-3,
+  .bg-body-tertiary {
+    background-color: #f7f3f0 !important;
+  }
+
+  .form-floating,
+  .mb-3 {
+    color: #3b2f23;
+
+    label {
+      color: #3b2f23;
+    }
+  }
+
+  .checkbox,
+  .mb-3 {
+    color: #3b2f23;
+  }
+
+  .w-100,
+  .btn,
+  .btn-lg,
+  .btn-warning {
+    color: #3b2f23;
+    border-color: #af8a68;
+    background-color: #af8a68;
+  }
+
+  button:hover {
+    color: #af8a68;
+    border-color: #3b2f23;
+    background-color: #3b2f23;
+  }
+
+  small {
+    color: #3b2f23 !important;
+  }
+
+  a {
+    color: #af8a68;
+  }
+
+  a:hover {
+    color: #3b2f23;
+  }
+}
+
+.container,
+.text-center {
+  padding: 2%;
+
+  .btn,
+  .btn-warning,
+  .btn-lg {
+    width: 25%;
+  }
+}
+
+body {
+  background-color: #ecdab9;
+}
+
+.collapse.show {
+  visibility: visible;
+}

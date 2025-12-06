@@ -1,23 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-import { onAuthReady } from "./authentication.js";
-import { doc, onSnapshot, getDoc } from "firebase/firestore";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import "/styles/style.css";
 
-function test() {
-  const testButton = document.getElementById("hello");
-  testButton?.addEventListener("click", async (e) => {
-    alert("hello");
-  });
-}
 
-// document.addEventListener('DOMContentLoaded', sayHello);
 
 // --- Initialize UI on DOMContentLoaded ---
-document.addEventListener("DOMContentLoaded", test);
+document.addEventListener("DOMContentLoaded", () => {
+  //this is a workaround to the fact that I was told index.html is hardcoded to be the landing page.
+  //if you load the url with no specified html file, it takes you to tournament-select.html.
+  if (!location.pathname === "/") {
+    window.location.href = "tournament-select.html";
+  }
+});

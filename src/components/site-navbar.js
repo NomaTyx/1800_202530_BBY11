@@ -1,3 +1,5 @@
+import "/styles/component-style.css";
+
 // Import specific functions from the Firebase Auth SDK
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "/src/firebaseConfig.js";
@@ -15,50 +17,37 @@ class SiteNavbar extends HTMLElement {
 
   renderNavbar() {
     this.innerHTML = `
-            <!-- Navbar: single source of truth -->
     <nav class="navbar navbar-expand-lg bg-warning">
       <div class="container-fluid">
-        <a class="navbar-brand" href="login.html">
-          <img src="./images/chess-placeholder.png" height="36" />
-          UTT
+        <a class="navbar-brand fs-3 fw-bold" href="tournament-select.html">
+          <img src="./images/uct-logo.svg" height="36" />
+          UCT
         </a>
+        <!-- The hamburger menu thing-->
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Actual Nav items -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="login.html">Home</a>
+              <a class="nav-link fs-4 fw-bold" href="tournament-select.html">Tournaments</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="data-entry.html">Tournaments</a>
+              <a class="nav-link fs-4 fw-bold" href="statistics.html">Statistics</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="statistics.html">Statistics</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="social.html">Socials</a>
+              <a class="nav-link fs-4 fw-bold" href="social.html">Socials</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
           <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
             <!-- populated by JS -->
           </div>
@@ -73,7 +62,7 @@ class SiteNavbar extends HTMLElement {
     onAuthStateChanged(auth, (user) => {
       let updatedAuthControl;
       if (user) {
-        updatedAuthControl = `<button class="btn btn-outline-light" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
+        updatedAuthControl = `<button class="btn btn-light" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
         authControls.innerHTML = updatedAuthControl;
         const signOutBtn = authControls.querySelector("#signOutBtn");
         signOutBtn?.addEventListener("click", logoutUser);

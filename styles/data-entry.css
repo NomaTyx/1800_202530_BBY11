@@ -1,0 +1,72 @@
+/* Colour Hex Codes
+#FDFBF8 - really light beige (Not sure if it's needed)
+#F7F3F0 - really light brown
+#ECDAB9 - light biege(?)
+#AF8A68 - light brown
+#3B2F23 - dark brown
+#1E1812 - really dark brown
+*/
+
+#add-round, #edit-round {
+    color: #3b2f23;
+    border-color: #af8a68; 
+    background-color: #af8a68;
+}
+
+#add-round:hover, #edit-round:hover {
+    color: #af8a68;
+    border-color: #3b2f23;
+    background-color: #3b2f23;
+}
+
+#add-round:active #edit-round:active {
+    color: #3B2F23 !important;
+    border-color: #FDFBF8 !important;
+    background-color: #FDFBF8 !important;
+}
+
+
+.accordion-button:link {
+    color: #3B2F23;
+    border-color: #FDFBF8;
+    background-color: #FDFBF8;
+}
+
+#roundnumber:hover {
+    color: #af8a68;
+    border-color: #3b2f23;
+    background-color: #3b2f23;
+}
+
+#roundnumber:active {
+    color: #3B2F23;
+    border-color: #FDFBF8;
+    background-color: #FDFBF8;
+}
+
+#deleteRoundButton {
+    margin-top: 1%;
+}
+
+#deleteRoundButton, #deleteTournamentButton {
+    color: #F7F3F0;
+    border-color: #3b2f23;
+    background-color: #3b2f23;
+}
+
+#deleteRoundButton:hover, #deleteTournamentButton:hover {
+    color: #3b2f23;
+    border-color: #af8a68;
+    background-color: #af8a68;
+}
+
+#deleteRoundButton:active, #deleteTournamentButton:active {
+    color: #3B2F23 !important;
+    border-color: #FDFBF8 !important;
+    background-color: #FDFBF8 !important;
+}
+
+#deleteTournamentButton {
+    margin-top: 1.5%;
+    margin-left: 3%;
+}

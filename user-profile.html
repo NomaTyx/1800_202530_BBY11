@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Socials</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+
+    <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/socals-style.css" />
+  </head>
+  <!-- profilePicture, username, bio, friendsList, numOfFriends (friendsList.size) -->
+  <body>
+    <site-navbar></site-navbar>
+
+    <div class="card">
+      <div class="user-info row g-0">
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title Username" id="usernameDisplay">Username here</h5>
+            <div class="bio-box card">
+              <p id="bioText" class="card-text">"bio message could go here"</p>
+            </div>
+          </div>
+        </div>
+        <!-- TODO: center this please!!-->
+        <div class="col d-flex align-items-center justify-content-center">
+          <button id="addFriendButton" class="btn btn-warning text-center">Add friend</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- this is where the list of tournaments goes-->
+    <div class="container align-items-center justify-content-center" id="tournamentholder">
+      <h1 class="text-center">This user's tournaments</h1>
+      <template id="cardTemplate">
+        <style>
+          .viewTournamentButton {
+            margin-top: 1%;
+            color: #3b2f23;
+            border-color: #af8a68;
+            background-color: #af8a68;
+          }
+
+          button:hover {
+            color: #af8a68;
+            border-color: #3b2f23;
+            background-color: #3b2f23;
+          }
+        </style>
+        <div class="card text-center w-100 viewTournamentButton">
+          <h5 class="tournamentName">tournament name will probably be long</h5>
+          <span class="roundsText">Rounds: x</span>
+          <span class="scoreText">Score: y/x</span>
+          <span class="dateText">m/d/y - m/d/y</span>
+        </div>
+      </template>
+    </div>
+
+    <site-footer></site-footer>
+
+    <!-- Link to scripts of your own -->
+    <script type="module" src="/src/user-profile.js"></script>
+    <script type="module" src="/src/firebaseConfig.js"></script>
+    <script type="module" src="/src/authentication.js"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
