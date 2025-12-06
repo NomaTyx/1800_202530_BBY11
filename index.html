@@ -23,6 +23,15 @@
     <!------------------------------>
     <!-- Stuff for body goes here -->
 
+    <script type="module">
+      import { auth } from "/src/firebaseConfig.js";
+      import { onAuthStateChanged } from "firebase/auth";
+
+      onAuthStateChanged(auth, (user) => {
+        window.location.href = user ? "main.html" : "login.html";
+      });
+    </script>
+
     <site-navbar></site-navbar>
 
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
